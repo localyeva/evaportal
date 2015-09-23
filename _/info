@@ -11,11 +11,12 @@ real: http://portal.evolable.asia/
 *****************************************************************************
 framework: wordpress
 login: lấy data login từ worktime
-server test 10.10.91.53 [10.10.91.53 root/P@ssweb]
+server test 10.10.91.53 [10.10.91.53 root/]
 có sẵn portal & worktime
 http://portaltest.evolable.asia/                   
 
 *[portal]*: user for test: --> pass: 123456
+tutt@evolableasia.vn
 emp_HCM@evolableasia.vn / emp_HAN@evolableasia.vn
 mng_HCM@evolableasia.vn / mng_HAN@evolableasia.vn
 cus_HCM@evolableasia.vn / cus_HAN@evolableasia.vn

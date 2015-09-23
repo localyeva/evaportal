@@ -1,1 +1,28 @@
 http://portal.evolable.asia/
+
+FTP ket noi vao 118.69.127.92
+
+http://web3.evolable.asia/
+DB: portal_db
+user: portal_usr
+password: 3Ba22lsW
+
+real: http://portal.evolable.asia/
+*****************************************************************************
+framework: wordpress
+login: lấy data login từ worktime
+server test 10.10.91.53 [10.10.91.53 root/P@ssweb]
+có sẵn portal & worktime
+http://portaltest.evolable.asia/                   
+
+*[portal]*: user for test: --> pass: 123456
+emp_HCM@evolableasia.vn / emp_HAN@evolableasia.vn
+mng_HCM@evolableasia.vn / mng_HAN@evolableasia.vn
+cus_HCM@evolableasia.vn / cus_HAN@evolableasia.vn
+
+user_status:
+Employee - SGN => 	1    Employee - HAN =>	2
+Customers - SGN => 	3    Customers - HAN => 4
+Manegers - SGN => 	5    Manegers - HAN => 	6
+
+
