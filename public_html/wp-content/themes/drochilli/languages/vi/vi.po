@@ -1,0 +1,398 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2015-06-10 09:50+0700\n"
+"PO-Revision-Date: 2015-06-10 09:50+0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-Basepath: ..\\..\\\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ClassIntro.php:18 ClassIntro.php:30 ClassIntroDetail.php:22
+#: Japaneseclass.php:27 RegisterClassJapanese.php:115
+#: RegisterClassJapaneseConfirm.php:88
+msgid "クラス紹介"
+msgstr "Giới thiệu lớp học"
+
+#: ClassIntro.php:19 ClassIntroDetail.php:23 Japaneseclass.php:28
+#: RegisterClassJapanese.php:116 RegisterClassJapaneseConfirm.php:89
+msgid "時間割"
+msgstr "Thời khóa biểu"
+
+#: ClassIntro.php:20 ClassIntroDetail.php:24 Japaneseclass.php:29
+#: RegisterClassJapanese.php:117 RegisterClassJapaneseConfirm.php:90
+msgid "連絡板"
+msgstr "Bảng liên lạc"
+
+#: ClassIntro.php:21 ClassIntroDetail.php:25 Japaneseclass.php:30
+#: RegisterClassJapanese.php:118 RegisterClassJapaneseConfirm.php:91
+msgid "動画･写真ギャラリー"
+msgstr "Hình ảnh - video"
+
+#: ClassIntro.php:22 ClassIntroDetail.php:26 Japaneseclass.php:31
+#: RegisterClassJapanese.php:119 RegisterClassJapaneseConfirm.php:92
+msgid "表彰者"
+msgstr "Giải thưởng"
+
+#: ClassIntro.php:23 ClassIntroDetail.php:28 Japaneseclass.php:32
+#: RegisterClassJapanese.php:120 RegisterClassJapaneseConfirm.php:93
+msgid "教師紹介"
+msgstr "Giới thiệu giáo viên"
+
+#: ClassIntro.php:32 ClassIntroDetail.php:81 ClassIntroDetail.php:126
+#: ClassIntroDetail.php:171 ClassIntroDetail.php:214
+msgid "申込"
+msgstr "Đăng ký"
+
+#: ClassIntro.php:38 ClassIntroDetail.php:41 ClassIntroDetail.php:52
+#: RegisterClassJapanese.php:136
+msgid "初級クラス"
+msgstr "Lớp sơ cấp"
+
+#: ClassIntro.php:41
+msgid "日本語の基礎、日常会話ができるための学習を行います。"
+msgstr "Học tiếng Nhật cơ bản và tiếng Nhật giao tiếp thường nhật"
+
+#: ClassIntro.php:44 ClassIntro.php:55 ClassIntro.php:67 ClassIntro.php:78
+msgid "詳細を見る"
+msgstr "Xem chi tiết"
+
+#: ClassIntro.php:49
+msgid "日本語能力試験対策"
+msgstr "Lớp luyện thi NLNN"
+
+#: ClassIntro.php:49 ClassIntro.php:72 ClassIntroDetail.php:51
+#: ClassIntroDetail.php:97 ClassIntroDetail.php:143 ClassIntroDetail.php:188
+msgid "クラス"
+msgstr "Lớp"
+
+#: ClassIntro.php:52
+msgid "日本語能力試験N1、及びN2の取得する為の3ヶ月前の集中講座。"
+msgstr "Tập trung ôn tập trước ba tháng để chuẩn bị cho kì thi NLNN N1 và N2."
+
+#: ClassIntro.php:60 ClassIntroDetail.php:130 ClassIntroDetail.php:144
+#: RegisterClassJapanese.php:138
+msgid "日本語ITクラス"
+msgstr "Lớp tiếng Nhật IT"
+
+#: ClassIntro.php:63
+msgid "システム開発の現場で使える実践的な会話を学習します"
+msgstr ""
+"Học tiếng Nhật có thể sử dụng thực tế trong công việc phát triển hệ thống."
+
+#: ClassIntro.php:72
+msgid "ビジネス会話･マナー"
+msgstr "Lớp đàm thoại Business và"
+
+#: ClassIntro.php:75
+msgid ""
+"一般的なビジネスの場面で使う実践的な会話はもちろん、マナー研修を行います"
+msgstr ""
+"Bên cạnh tiếng Nhật Business có thể sử dụng thực tế, người học còn được học "
+"về tác phong làm việc."
+
+#: ClassIntroDetail.php:45 ClassIntroDetail.php:89 ClassIntroDetail.php:134
+#: ClassIntroDetail.php:179
+msgid "2015年度"
+msgstr "Năm 2015"
+
+#: ClassIntroDetail.php:45 ClassIntroDetail.php:89 ClassIntroDetail.php:134
+#: ClassIntroDetail.php:179
+msgid "実施要項"
+msgstr "Thời gian áp dụng"
+
+#: ClassIntroDetail.php:47 ClassIntroDetail.php:90 ClassIntroDetail.php:180
+msgid "年2回実施"
+msgstr "Tuyển sinh 1 năm 2 lần"
+
+#: ClassIntroDetail.php:48
+msgid "2月･7月　(週3回)"
+msgstr "Tháng 2, tháng 7 (1 tuần 3 lần)"
+
+#: ClassIntroDetail.php:55
+msgid "初級継続クラス"
+msgstr "Lớp sơ cấp liên tục"
+
+#: ClassIntroDetail.php:58 ClassIntroDetail.php:104 ClassIntroDetail.php:147
+#: ClassIntroDetail.php:192
+msgid "※受講人数が5名を達しない場合は開講されません。"
+msgstr "* Nếu số lượng đăng kí không đủ 5 người thì không mở lớp."
+
+#: ClassIntroDetail.php:59
+msgid ""
+"※教室が確保されない場合は上記の時間のクラスを開講できない場合もあります。"
+msgstr ""
+"* Trong trường hợp không có phòng học thì có thể không mở lớp như thời gian "
+"ghi như trên."
+
+#: ClassIntroDetail.php:63 ClassIntroDetail.php:108 ClassIntroDetail.php:151
+#: ClassIntroDetail.php:196
+msgid "目標"
+msgstr "Mục tiêu"
+
+#: ClassIntroDetail.php:64
+msgid "日常会話ができ、日本語能力試験N4合格"
+msgstr "Có thể giao tiếp thường nhật, có thể thi lấy bằng N4"
+
+#: ClassIntroDetail.php:68 ClassIntroDetail.php:113 ClassIntroDetail.php:156
+#: ClassIntroDetail.php:201
+msgid "授業内容"
+msgstr "Nội dung giảng dạy"
+
+#: ClassIntroDetail.php:70
+msgid "場面シラバスにのっとった会話中心で行われる。"
+msgstr "Thông qua những tình huống thực tế trong cuộc sống để học ngữ pháp"
+
+#: ClassIntroDetail.php:71
+msgid "文法の基礎、漢字、読解、聴解"
+msgstr ", Kanji (chữ Hán), đọc và nghe"
+
+#: ClassIntroDetail.php:75 ClassIntroDetail.php:121 ClassIntroDetail.php:164
+#: ClassIntroDetail.php:209
+msgid "対象"
+msgstr "Đối tượng"
+
+#: ClassIntroDetail.php:76
+msgid "日本語初心者～初級者"
+msgstr "Người mới học tiếng Nhật, người có trình độ sơ cấp"
+
+#: ClassIntroDetail.php:85 RegisterClassJapanese.php:137
+msgid "日本語能力試験対策クラス"
+msgstr "Lớp luyện thi NLNN"
+
+#: ClassIntroDetail.php:91
+msgid "4月･9月"
+msgstr "Tháng 4, tháng 9"
+
+#: ClassIntroDetail.php:92
+msgid "① 4月～6月"
+msgstr "① tháng 4～tháng6"
+
+#: ClassIntroDetail.php:93
+msgid "② 9月～11月"
+msgstr "② tháng 9～tháng 11 "
+
+#: ClassIntroDetail.php:98
+msgid "N1対策クラス"
+msgstr "Lớp luyện thi N1"
+
+#: ClassIntroDetail.php:101
+msgid "N2対策クラス"
+msgstr "Lớp luyện thi N2"
+
+#: ClassIntroDetail.php:109
+msgid "日本語能力試験N1,N2合格"
+msgstr "Đậu kì thi NLNN N1, N2"
+
+#: ClassIntroDetail.php:115
+msgid "新･日本語能力試験に対応"
+msgstr "Ôn tập kì thi NLNN mới"
+
+#: ClassIntroDetail.php:116
+msgid "文字語彙、文法、読解、聴解の演習、解説。"
+msgstr "Luyện tập và giải thích từ vựng, ngữ pháp, đọc hiểu và nghe hiểu"
+
+#: ClassIntroDetail.php:117
+msgid "1～3回程、模擬試験を実施いたします。"
+msgstr "Tổ chức thi thử khoảng từ 1 đến 3 lần"
+
+#: ClassIntroDetail.php:122 ClassIntroDetail.php:165 ClassIntroDetail.php:210
+msgid "N3、旧3級取得者もしくはそれ相応レベルの日本語能力を有する者。"
+msgstr "Người có bằng N3, 3 Kyu hoặc người có trình độ tương đương."
+
+#: ClassIntroDetail.php:135
+msgid "2月･6月･9月　(週2回)"
+msgstr "Tháng 2, tháng 6, tháng 9 (1 tuần 2 lần)"
+
+#: ClassIntroDetail.php:136
+msgid "① 2月～5月"
+msgstr "Đợt 1: từ tháng 2 đến tháng 5"
+
+#: ClassIntroDetail.php:137
+msgid "② 6月～8月"
+msgstr "Đợt 2: từ tháng 6 đến tháng 8"
+
+#: ClassIntroDetail.php:138
+msgid "③ 9月～11月"
+msgstr "Đợt 3: từ tháng 9 đến tháng 11"
+
+#: ClassIntroDetail.php:152
+msgid "ITのシステム開発の現場で使える業務会話を取得"
+msgstr ""
+"Tiếng Nhật đàm thoại có thể sử dụng trong công việc phát triển hệ thống"
+
+#: ClassIntroDetail.php:158
+msgid "ITの基礎知識"
+msgstr "Kiến thức IT cơ bản"
+
+#: ClassIntroDetail.php:159
+msgid "現場で使われる会話練習"
+msgstr "Luyện tập những tình huống giao tiếp thực tế"
+
+#: ClassIntroDetail.php:166
+msgid "Com,BPOスタッフ。"
+msgstr "Nhân viên Com, BPO"
+
+#: ClassIntroDetail.php:175 RegisterClassJapanese.php:139
+msgid "ビジネス会話･マナークラス"
+msgstr "Lớp đàm thoại Business, tác phong"
+
+#: ClassIntroDetail.php:181
+msgid "7月･12月　(週3回)"
+msgstr "Tháng 7, tháng 12 (1 tuần 3 lần)"
+
+#: ClassIntroDetail.php:182
+msgid "① 7月～8月"
+msgstr "Đợt 1: tháng 7 đến tháng 8"
+
+#: ClassIntroDetail.php:183
+msgid "② 12月～翌年3月"
+msgstr "Đợt 2: từ tháng 12 đến tháng 3 năm sau"
+
+#: ClassIntroDetail.php:189
+msgid "ビジネスクラス"
+msgstr "Lớp Business"
+
+#: ClassIntroDetail.php:197
+msgid "ビジネスで使える敬語、マナーを取得"
+msgstr "Học kính ngữ và tác phong có thể sử dụng trong kinh doanh"
+
+#: ClassIntroDetail.php:203
+msgid "敬語の復習"
+msgstr "Ôn tập kính ngữ"
+
+#: ClassIntroDetail.php:204
+msgid "場面に合わせたロールプレイ"
+msgstr "Luyện tập những tình huống thực tế"
+
+#: ClassIntroDetail.php:205
+msgid "ビジネスマネー研修"
+msgstr "Thực tập tác phong kinh doanh"
+
+#: Japaneseclass.php:21
+msgid "新しい投稿を。"
+msgstr "Đăng bài mới"
+
+#: archive.php:41 index.php:24 search.php:26
+msgid "Category:"
+msgstr ""
+
+#: archive.php:42 index.php:25 search.php:27
+msgid "Tags: "
+msgstr ""
+
+#: archive.php:62 comments.php:32 index.php:45 search.php:47
+msgid "&laquo; Previous"
+msgstr ""
+
+#: archive.php:63 comments.php:33 index.php:46 search.php:48
+msgid "Next &raquo;"
+msgstr ""
+
+#: comments.php:14
+msgid ""
+"This post is password protected. To view it please enter your password below"
+msgstr ""
+
+#: comments.php:44
+msgid "Sorry, comments are closed for this item."
+msgstr ""
+
+#: comments.php:57
+msgid "Sorry, you must be logged in to reply to a comment."
+msgstr ""
+
+#: comments.php:67
+msgid "Name:"
+msgstr ""
+
+#: comments.php:67 comments.php:69
+msgid "(required)"
+msgstr ""
+
+#: comments.php:69
+msgid "E-mail:"
+msgstr ""
+
+#: comments.php:69
+msgid "(will not be published)"
+msgstr ""
+
+#: comments.php:71
+msgid "URL:"
+msgstr ""
+
+#: comments.php:77
+msgid "Your Comment"
+msgstr ""
+
+#: comments.php:78
+#, php-format
+msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
+msgstr ""
+
+#: comments.php:79
+#, php-format
+msgid ""
+"Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of "
+"this account\">Log out?</a>"
+msgstr ""
+
+#: comments.php:84
+msgid "Leave a comment"
+msgstr ""
+
+#: comments.php:85
+#, php-format
+msgid "Leave a comment to %s"
+msgstr ""
+
+#: comments.php:86
+msgid "Cancel reply"
+msgstr ""
+
+#: comments.php:87
+msgid "Submit Comment"
+msgstr ""
+
+#: content-single.php:23
+msgid "Edit This"
+msgstr ""
+
+#: error.php:11
+msgid "Page not found"
+msgstr ""
+
+#: error.php:25
+msgid "Sorry, no posts matched your criteria."
+msgstr ""
+
+#: functions.php:80
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: functions.php:97
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: search.php:12
+msgid "Search Results"
+msgstr ""
+
+#~ msgid "?> 場面シラバスにのっとった会話中心で行われる。"
+#~ msgstr "Thông qua những tình huống thực tế trong cuộc sống để học ngữ pháp"
+
+#~ msgid "新しい投稿を作成します。"
+#~ msgstr "Đăng bài mới"
+
+#~ msgid "the sheft"
+#~ msgstr "Đây la con cừu"
