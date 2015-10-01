@@ -3,45 +3,30 @@
  * @package WordPress
  * @subpackage Drochilli_Theme
  */
-get_header(); ?>
+get_header();
+?>
 
-<div id="content">
+<div class="row" id="content">    
+    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <div class="col-lg-12" id="post-<?php the_ID(); ?>">
+                <?php the_content(); ?>
+                <?php wp_link_pages(); ?>
+                <?php //edit_post_link( __('Edit This', 'drochilli') , '<p>', '</p>');  ?>
+            </div>
+            <?php //if ( comments_open() ) {  ?>
+            <!--<div class="comments">
+            <?php //comments_template();  ?>
+            </div>-->
+            <?php //}  ?>
 
-	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+        <?php endwhile; ?>
 
-	<div class="posts">
+    <?php else : ?>
 
-		<div class="post clearfix" id="post-<?php the_ID(); ?>">
-			
-			<!--<div class="title">
-				<h2><?php //the_title(); ?></h2>
-			</div>-->
+        <?php get_template_part('error'); ?>
 
-			<div class="entry">
-				<?php the_content(); ?>
-				<?php wp_link_pages(); ?>
-				<?php //edit_post_link( __('Edit This', 'drochilli') , '<p>', '</p>'); ?>
-			</div>
-		</div>
-
-	</div>
-
-	<?php //if ( comments_open() ) { ?>
-	<!--<div class="comments">
-		<?php //comments_template(); ?>
-	</div>-->
-	<?php //} ?>
-
-<?php endwhile; ?>
-
-<?php else : ?>
-
-	<?php get_template_part('error'); ?>
-
-<?php endif; ?>
-
+    <?php endif; ?>
 </div>
 
-<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>

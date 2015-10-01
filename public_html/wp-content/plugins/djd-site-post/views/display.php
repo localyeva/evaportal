@@ -91,27 +91,33 @@ function myplugin_tinymce_buttons($buttons)
         $term_employment=$categories[0]->term_id;
        
         ?>
-
-
-        <form id="site_post_form" class="djd_site_post_form bordered" method="post"
+<div class="row">      
+        <form id="site_post_form" method="post"
               action="<?php echo admin_url('admin-ajax.php'); ?>" enctype="multipart/form-data">
             <p hidden="hidden" class="form_error_message"></p>
             <input type="hidden"
                    name="djd-our-id" <?php echo($my_post ? "value='" . $my_post->ID . "'" : "value='" . $djd_post_id . "'"); ?> />
             <input type="hidden"
                    name="djd-our-author" <?php if ($my_post) echo "value='" . $my_post->post_author . "'"; ?> />
-
-            <div id="field-wrapper">
-                <label
-                    for="djd_site_post_titel"><?php echo($djd_options['djd-title'] ? $djd_options['djd-title'] : __('Title', 'djd-site-post')); ?></label>
-                <input type="text" <?php if ($djd_options['djd-title-required'] == "1") echo "required='required'"; ?>
-                       id="djd_site_post_title" name="djd_site_post_title" maxlength="255"
+            <div class="form-group col-lg-12">
+                <label class="col-lg-12" for="djd_site_post_titel">
+                    <?php echo($djd_options['djd-title'] ? $djd_options['djd-title'] : __('Title', 'djd-site-post')); ?>
+                </label>
+                <div class="col-lg-6"> 
+                    <input class="form-control" type="text" <?php if ($djd_options['djd-title-required'] == "1") echo "required='required'"; ?>
+                        name="djd_site_post_title" maxlength="255"
                        <?php if ($my_post) echo "value='" . $my_post->post_title . "'"; ?>autofocus="autofocus"/>
-                <?php if ($djd_options['djd-show-excerpt']) { ?>
-                    <label for="djd_site_post_excerpt"><?php echo($djd_options['djd-excerpt'] ? $djd_options['djd-excerpt'] : __('Excerpt', 'djd-site-post')); ?></label>
-                    <textarea id="djd_site_post_excerpt" name="djd_site_post_excerpt"><?php if ($my_post) echo $my_post->post_excerpt; ?></textarea>
-                <?php } ?>
-                <?php
+                </div>
+            </div>
+            <?php if ($djd_options['djd-show-excerpt']) { ?>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-12"  for="djd_site_post_excerpt"><?php echo($djd_options['djd-excerpt'] ? $djd_options['djd-excerpt'] : __('Excerpt', 'djd-site-post')); ?></label>
+                <div class="col-lg-6"> 
+                    <textarea class="form-control" id="djd_site_post_excerpt" name="djd_site_post_excerpt"><?php if ($my_post) echo $my_post->post_excerpt; ?></textarea>
+                </div>
+            </div>
+            <?php } ?>
+            <?php
                 $settings = array(
                     'media_buttons' => (boolean)$djd_options['djd-allow-media-upload'],
                     'teeny' => $teeny,
@@ -150,26 +156,31 @@ function myplugin_tinymce_buttons($buttons)
                     'tab_index' => 0,
                     'hide_if_empty' => false
                 ); ?>
-                <div>
-                    <label
+                <div class="form-group col-lg-12">
+                    <label class="col-lg-12"
                         for="select_post_category"><?php echo($djd_options['djd-categories-label'] ? $djd_options['djd-categories-label'] : __('Select a Category', 'djd-site-post')); ?></label>
                     <?php if (!empty($_GET['page_id']) && $_GET['page_id'] == 66): ?>
-                        <select name="djd_site_post_select_category" id="djd_site_post_select_category" class="class=djd_site_post_form">
+                    <div class="col-lg-3"> 
+                        <select class="form-control" name="djd_site_post_select_category" id="djd_site_post_select_category" class="class=djd_site_post_form">
                             <option class="level-0" value="3" <?php echo $term_employment=='3'?'selected':'';?>>All</option>
                             <option class="level-0" value="4" <?php echo $term_employment=='4'?'selected':'';?> >Employee</option>
                             <option class="level-0" value="5" <?php echo $term_employment=='5'?'selected':'';?>>Customer</option>
                             <option class="level-0" value="6" <?php echo $term_employment=='6'?'selected':'';?>>Manager</option>
                         </select>
+                    </div>
                     <?php endif; ?>
                     <?php if (!empty($_GET['page_id']) && $_GET['page_id'] == 199): ?>
-                        <select name="djd_site_post_select_category" id="djd_site_post_select_category" class="class=djd_site_post_form">
+                    <div class="col-lg-3"> 
+                        <select class="form-control" name="djd_site_post_select_category" id="djd_site_post_select_category" class="class=djd_site_post_form">
                             <option class="level-0" value="8">初級クラス</option>
                             <option class="level-0" value="9">日本語能力</option>
                             <option class="level-0" value="10">日本語IT</option>
                             <option class="level-0" value="11">ビジネス・マナー</option>
                             <option class="level-0" value="12">その他</option>
                         </select>
+                    </div>
                     <?php endif; ?>
+                </div>
                     <?php //echo str_replace("&nbsp;", "&#160;", wp_dropdown_categories($args));
                     break;
                     case 'check':
@@ -182,8 +193,10 @@ function myplugin_tinymce_buttons($buttons)
                             'taxonomy' => 'category',
                             'pad_counts' => false
                         ); ?>
-                        <label
+                        <div class="form-group col-lg-12">
+                        <label class="col-lg-12"
                             for="djd_site_post_cat_checklist"><?php echo($djd_options['djd-categories-label'] ? $djd_options['djd-categories-label'] : __('Category', 'djd-site-post')); ?></label>
+                            <div class="col-lg-12"> 
                         <ul id="djd_site_post_cat_checklist">
                             <?php $cats = get_categories($args);
                             foreach ($cats as $cat) { ?>
@@ -192,20 +205,30 @@ function myplugin_tinymce_buttons($buttons)
                                 </li>
                             <?php } ?>
                         </ul>
+                            </div>
+                        </div>
                         <?php break;
                     }
                     }
                     if ($djd_options['djd-allow-new-category'] && $verified_user['djd_can_manage_categories']) { ?>
-                        <label
+                    <div class="form-group col-lg-12">
+                        <label class="col-lg-12"
                             for="djd_site_post_new_category"><?php echo($djd_options['djd-create-category'] ? $djd_options['djd-create-category'] : __('New category', 'djd-site-post')); ?></label>
-                        <input type="text" id="djd_site_post_new_category" name="djd_site_post_new_category"
+                        <div class="col-lg-6"> 
+                        <input class="form-control" type="text" id="djd_site_post_new_category" name="djd_site_post_new_category"
                                maxlength="255"/>
+                        </div>
+                    </div>
                     <?php }
                     if ($djd_options['djd-show-tags']) { ?>
-                        <label
+                    <div class="form-group col-lg-12">
+                        <label class="col-lg-12"
                             for="djd_site_post_tags"><?php echo($djd_options['djd-tags'] ? $djd_options['djd-tags'] : __('Tags (comma-separated)', 'djd-site-post')); ?></label>
-                        <input type="text" id="djd_site_post_tags" name="djd_site_post_tags"
+                        <div class="col-lg-6"> 
+                        <input class="form-control" type="text" id="djd_site_post_tags" name="djd_site_post_tags"
                                maxlength="255" <?php if ($my_post) echo "value='" . implode(', ', $my_post->tags_input) . "'"; ?>/>
+                        </div>
+                    </div>
                     <?php }
 
                     if (current_theme_supports('post-formats') && $djd_options['djd-post-format']) {
@@ -219,8 +242,10 @@ function myplugin_tinymce_buttons($buttons)
                             if ($post_format && !in_array($post_format, $post_formats[0]))
                                 $post_formats[0][] = $post_format;
                             ?>
-                            <label for='djd-post-format'><?php _e('Post Format', 'djd-site-post'); ?></label>
-                            <select id='djd-post-format' name='djd-post-format'>
+                        <div class="form-group col-lg-12">
+                            <label class="col-lg-12" for='djd-post-format'><?php _e('Post Format', 'djd-site-post'); ?></label>
+                            <div class="col-lg-6"> 
+                            <select class="form-control" id='djd-post-format' name='djd-post-format'>
                                 <option
                                     value="0" <?php selected($post_format, '0'); ?> ><?php echo get_post_format_string('standard'); ?></option>
                                 <?php foreach ($post_formats[0] as $format) : ?>
@@ -228,44 +253,62 @@ function myplugin_tinymce_buttons($buttons)
                                         value="<?php echo esc_attr($format); ?>" <?php selected($post_format, $format); ?> ><?php echo esc_html(get_post_format_string($format)); ?></option>
                                 <?php endforeach; ?>
                             </select>
+                            </div>
+                        </div>
                         <?php endif;
                     }
 
                     if (($djd_options['djd-guest-info']) && (!is_user_logged_in())) { ?>
-                        <label for="djd_site_post_guest_name"><?php _e('Your Name', 'djd-site-post'); ?></label>
-                        <input type="text" required="required" id="djd_site_post_guest_name"
+                    <div class="form-group col-lg-12">
+                        <label class="col-lg-12" for="djd_site_post_guest_name"><?php _e('Your Name', 'djd-site-post'); ?></label>
+                        <div class="col-lg-6"> 
+                        <input class="form-control" type="text" required="required" id="djd_site_post_guest_name"
                                name="djd_site_post_guest_name"
                                maxlength="40"/>
-
-                        <label for="djd_site_post_guest_email"><?php _e('Your Email', 'djd-site-post'); ?></label>
-                        <input type="email" required="required" id="djd_site_post_guest_email"
-                               name="djd_site_post_guest_email" maxlength="40"/><br><br>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <label class="col-lg-12" for="djd_site_post_guest_email"><?php _e('Your Email', 'djd-site-post'); ?></label>
+                        <div class="col-lg-6"> 
+                        <input class="form-control" type="email" required="required" id="djd_site_post_guest_email"
+                               name="djd_site_post_guest_email" maxlength="40"/>
+                        </div>
+                        <br><br>
+                    </div>
                     <?php } ?>
+                <div class="form-group col-lg-12">
 					<?php $posttp=$my_post->post_type;?>
                     <!--<span id="loading"></span>-->
-                    <label for="djd_site_post_guest_email">Select Location</label>
-                    <select id="djd-post-type" name="djd-post-type">
+                    <label class="col-lg-12" for="djd_site_post_guest_email">Select Location</label>
+                    <div class="col-lg-6"> 
+                    <select class="form-control" id="djd-post-type" name="djd-post-type">
                         <option value="all" <?php echo $posttp=='all'?'selected':'';?>>All</option>
                         <option value="hcm" <?php echo $posttp=='hcm'?'selected':'';?>>Ho Chi Minh</option>
                         <option value="hanoi" <?php echo $posttp=='hanoi'?'selected':'';?>>Hanoi</option>
                     </select>
+                    </div>
+                    <input type="hidden" name="action" value="process_site_post_form"/>
                 </div>
-                <input type="hidden" name="action" value="process_site_post_form"/>
-                <label
-                    for="djdsitepostcontent"><?php echo($djd_options['djd-content'] ? $djd_options['djd-content'] : __('Text', 'djd-site-post')); ?></label>
+                
+                <div class="form-group col-lg-12">
+                <label class="col-lg-12"
+                    for="djdsitepostcontent"><?php echo($djd_options['djd-content'] ? $djd_options['djd-content'] : __('Text', 'djd-site-post')); ?></label>    
+                <div class="col-lg-12"> 
                 <?php
-                wp_editor($editor_content, 'djdsitepostcontent', $settings);
+                wp_editor($editor_content, 'djdsitepostcontent', $settings);                
                 if (($djd_options['djd-quiz']) && (!is_user_logged_in())) { ?>
                     <?php $no1 = mt_rand(1, 12);
                     $no2 = mt_rand(1, 12); ?>
                     <label class="error" for="djd_quiz" id="quiz_error"
                            style="margin: 0 0 5px 10px; display: none; color: red;"><?php _e('Wrong Quiz Answer!', 'djd-site-post'); ?></label>
                     <label for="djd_quiz" id="djd_quiz_label"><?php echo $no1; ?> plus <?php echo $no2; ?> =</label>
-                    <input type="text" required="required" id="djd_quiz" name="djd_quiz" maxlength="2" size="2"/>
+                    <input class="form-control" type="text" required="required" id="djd_quiz" name="djd_quiz" maxlength="2" size="2"/>
                     <input type="hidden" id="djd_quiz_hidden" name="djd_quiz_hidden"
                            value="<?php echo $no1 + $no2; ?>"/>
                 <?php } ?>
-		
+		</div>
+                
+                    <div class="col-lg-2" style="padding-top: 40px">
 		<?php if ($filename != ''): ?>
                     <div id="show-attach-file">
                         Attach file: <span><?php echo $filename; ?></span> <button type="button" id="update-attach-file">Update attach file</button>
@@ -274,18 +317,19 @@ function myplugin_tinymce_buttons($buttons)
                     <input type="file" name="xxxx_image">
                 <?php endif; ?>
 	  	<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
-                <div id="post-back-btn">
-                <button type="submit" class="send-button"
-                        id="submit"><?php echo($djd_options['djd-send-button'] ? $djd_options['djd-send-button'] : __('Publish', 'djd-site-post')); ?></button>
-                <?php if (isset($_GET["post_id"])): ?>
-                    <a class="back alignright" href="<?php echo wp_get_referer() ?>" title="Back"><span>Back</span></a>
-                <?php endif; ?>
+                </div>
+                </div>
+                <div id="post-back-btn" class="col-lg-12 text-center">
+                    <button type="submit" class="send-button btn btn-warning"
+                            id="submit"><?php echo($djd_options['djd-send-button'] ? $djd_options['djd-send-button'] : __('Publish', 'djd-site-post')); ?></button>
+                    <?php if (isset($_GET["post_id"])): ?>
+                        <a class="btn btn-warning" href="<?php echo wp_get_referer() ?>" title="Back"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+                    <?php endif; ?>
                 </div>
                
-            </div>
-            <!-- field-wrapper -->
         </form>
         <!--<div id="feedback"></div>-->
+</div>
     <?php } ?>
 <?php endif; ?>
 <script>

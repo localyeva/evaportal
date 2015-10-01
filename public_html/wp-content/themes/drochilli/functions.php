@@ -60,7 +60,7 @@ function drochilli_scripts_styles() {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'drochilli_scripts_styles' );
+//add_action( 'wp_enqueue_scripts', 'drochilli_scripts_styles' );
 
 function drochilli_wp_title( $title, $sep ) {
 	global $paged, $page;
@@ -316,3 +316,36 @@ function delete_associated_media($post_id) {
 }
 add_action('before_delete_post', 'delete_associated_media');
 
+add_action('wp_head', 'set_active_menu', 10);
+
+$active_menus = array();
+
+function set_active_menu() {
+    global $active_menus;
+    $active_menus = array('information'=>'','document' => '', 'japanese' => '', 'contact' => '', 'schedule' => '');
+    /*
+    echo '<pre style="text-align:right">';
+    print_r(get_the_ID());
+    echo '</pre>';
+     * 
+     */
+    switch (get_the_ID()) {
+        case 24: //information
+            $active_menus['information'] = 'active';
+            break;
+        case 19: //document
+            $active_menus['document'] = 'active';
+            break;
+        case 31: //Japanese
+            $active_menus['japanese'] = 'active';
+            break;
+        case 58: //Contact
+            $active_menus['contact'] = 'active';
+            break;
+        case 83: //Schedule
+            $active_menus['schedule'] = 'active';
+            break;
+        default:
+            break;
+    }
+}

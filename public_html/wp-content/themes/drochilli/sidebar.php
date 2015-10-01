@@ -4,7 +4,7 @@
  * @subpackage Drochilli_Theme
  */
 ?>
-<div id="aside">
+<div id="aside" style="display: none">
 
 	<ul>
 

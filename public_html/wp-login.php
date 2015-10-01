@@ -7,7 +7,6 @@
  *
  * @package WordPress
  */
-
 /** Make sure that the WordPress bootstrap has run before continuing. */
 require(dirname(__FILE__) . '/wp-load.php');
 
@@ -30,244 +29,257 @@ if (force_ssl_admin() && !is_ssl()) {
  * @param string $message Optional. Message to display in header. Default empty.
  * @param WP_Error $wp_error Optional. The error to pass. Default empty.
  */
-function login_header( $title = 'Log In', $message = '', $wp_error = '' ) {
-global $error, $interim_login, $action;
+function login_header($title = 'Log In', $message = '', $wp_error = '') {
+    global $error, $interim_login, $action;
 
 // Don't index any of these forms
-add_action('login_head', 'wp_no_robots');
+    add_action('login_head', 'wp_no_robots');
 
-if (wp_is_mobile())
-    add_action('login_head', 'wp_login_viewport_meta');
+    if (wp_is_mobile())
+        add_action('login_head', 'wp_login_viewport_meta');
 
-if (empty($wp_error))
-    $wp_error = new WP_Error();
+    if (empty($wp_error))
+        $wp_error = new WP_Error();
 
 // Shake it!
-$shake_error_codes = array('empty_password', 'empty_email', 'invalid_email', 'invalidcombo', 'empty_username', 'invalid_username', 'incorrect_password');
-/**
- * Filter the error codes array for shaking the login form.
- *
- * @since 3.0.0
- *
- * @param array $shake_error_codes Error codes that shake the login form.
- */
-$shake_error_codes = apply_filters('shake_error_codes', $shake_error_codes);
-
-if ($shake_error_codes && $wp_error->get_error_code() && in_array($wp_error->get_error_code(), $shake_error_codes))
-    add_action('login_head', 'wp_shake_js', 12);
-
-?><!DOCTYPE html>
-<!--[if IE 8]>
-<html xmlns="http://www.w3.org/1999/xhtml" class="ie8" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if !(IE 8) ]><!-->
-<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
-<!--<![endif]-->
-<head>
-    <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>"/>
-    <title><?php bloginfo('name'); ?> &rsaquo; <?php echo $title; ?></title>
-    <?php
-
-    wp_admin_css('login', true);
-
-    /*
-     * Remove all stored post data on logging out.
-     * This could be added by add_action('login_head'...) like wp_shake_js(),
-     * but maybe better if it's not removable by plugins
+    $shake_error_codes = array('empty_password', 'empty_email', 'invalid_email', 'invalidcombo', 'empty_username', 'invalid_username', 'incorrect_password');
+    /**
+     * Filter the error codes array for shaking the login form.
+     *
+     * @since 3.0.0
+     *
+     * @param array $shake_error_codes Error codes that shake the login form.
      */
-    if ('loggedout' == $wp_error->get_error_code()) {
-        ?>
-        <script>if ("sessionStorage" in window) {
-                try {
-                    for (var key in sessionStorage) {
-                        if (key.indexOf("wp-autosave-") != -1) {
-                            sessionStorage.removeItem(key)
+    $shake_error_codes = apply_filters('shake_error_codes', $shake_error_codes);
+
+    if ($shake_error_codes && $wp_error->get_error_code() && in_array($wp_error->get_error_code(), $shake_error_codes))
+        add_action('login_head', 'wp_shake_js', 12);
+    ?><!DOCTYPE html>
+    <!--[if IE 8]>
+    <html xmlns="http://www.w3.org/1999/xhtml" class="ie8" <?php language_attributes(); ?>>
+    <![endif]-->
+    <!--[if !(IE 8) ]><!-->
+    <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+        <!--<![endif]-->
+        <head>
+            <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>"/>
+            <title><?php bloginfo('name'); ?> &rsaquo; <?php echo $title; ?></title>   
+
+            <?php
+            //wp_admin_css('login', true);
+
+            /*
+             * Remove all stored post data on logging out.
+             * This could be added by add_action('login_head'...) like wp_shake_js(),
+             * but maybe better if it's not removable by plugins
+             */
+            if ('loggedout' == $wp_error->get_error_code()) {
+                ?>
+                <script>if ("sessionStorage" in window) {
+                        try {
+                            for (var key in sessionStorage) {
+                                if (key.indexOf("wp-autosave-") != -1) {
+                                    sessionStorage.removeItem(key)
+                                }
+                            }
+                        } catch (e) {
                         }
                     }
-                } catch (e) {
-                }
+                    ;</script>
+                <?php
             }
-            ;</script>
-    <?php
-    }
 
-    /**
-     * Enqueue scripts and styles for the login page.
-     *
-     * @since 3.1.0
-     */
-    do_action('login_enqueue_scripts');
-    /**
-     * Fires in the login page header after scripts are enqueued.
-     *
-     * @since 2.1.0
-     */
-    do_action('login_head');
-
-    if (is_multisite()) {
-        $login_header_url = network_home_url();
-        $login_header_title = get_current_site()->site_name;
-    } else {
-        $login_header_url = __('https://wordpress.org/');
-        $login_header_title = __('Powered by WordPress');
-    }
-
-    /**
-     * Filter link URL of the header logo above login form.
-     *
-     * @since 2.1.0
-     *
-     * @param string $login_header_url Login header logo URL.
-     */
-    $login_header_url = apply_filters('login_headerurl', $login_header_url);
-    /**
-     * Filter the title attribute of the header logo above login form.
-     *
-     * @since 2.1.0
-     *
-     * @param string $login_header_title Login header logo title attribute.
-     */
-    $login_header_title = apply_filters('login_headertitle', $login_header_title);
-
-    $classes = array('login-action-' . $action, 'wp-core-ui');
-    if (wp_is_mobile())
-        $classes[] = 'mobile';
-    if (is_rtl())
-        $classes[] = 'rtl';
-    if ($interim_login) {
-        $classes[] = 'interim-login';
-        ?>
-        <style type="text/css">html {
-                background-color: transparent;
-            }</style>
-        <?php
-
-        if ('success' === $interim_login)
-            $classes[] = 'interim-login-success';
-    }
-    $classes[] = ' locale-' . sanitize_html_class(strtolower(str_replace('_', '-', get_locale())));
-
-    /**
-     * Filter the login page body classes.
-     *
-     * @since 3.5.0
-     *
-     * @param array $classes An array of body classes.
-     * @param string $action The action that brought the visitor to the login page.
-     */
-    $classes = apply_filters('login_body_class', $classes, $action);
-
-    ?>
-
-</head>
-<body class="login <?php echo esc_attr(implode(' ', $classes)); ?>">
-<div id="login">
-    <h1><a href="<?php echo esc_url($login_header_url); ?>" title="<?php echo esc_attr($login_header_title); ?>"
-           tabindex="-1"><?php bloginfo('name'); ?></a></h1>
-    <?php
-
-    unset($login_header_url, $login_header_title);
-
-    /**
-     * Filter the message to display above the login form.
-     *
-     * @since 2.1.0
-     *
-     * @param string $message Login message text.
-     */
-    $message = apply_filters('login_message', $message);
-    if (!empty($message))
-        echo $message . "\n";
-
-    // In case a plugin uses $error rather than the $wp_errors object
-    if (!empty($error)) {
-        $wp_error->add('error', $error);
-        unset($error);
-    }
-
-    if ($wp_error->get_error_code()) {
-        $errors = '';
-        $messages = '';
-        foreach ($wp_error->get_error_codes() as $code) {
-            $severity = $wp_error->get_error_data($code);
-            foreach ($wp_error->get_error_messages($code) as $error_message) {
-                if ('message' == $severity)
-                    $messages .= '	' . $error_message . "<br />\n";
-                else
-                    $errors .= '	' . $error_message . "<br />\n";
-            }
-        }
-        if (!empty($errors)) {
             /**
-             * Filter the error messages displayed above the login form.
+             * Enqueue scripts and styles for the login page.
+             *
+             * @since 3.1.0
+             */
+            do_action('login_enqueue_scripts');
+            /**
+             * Fires in the login page header after scripts are enqueued.
+             *
+             * @since 2.1.0
+             */
+            do_action('login_head');
+
+            if (is_multisite()) {
+                $login_header_url = network_home_url();
+                $login_header_title = get_current_site()->site_name;
+            } else {
+                $login_header_url = __('https://wordpress.org/');
+                $login_header_title = __('Powered by WordPress');
+            }
+
+            /**
+             * Filter link URL of the header logo above login form.
              *
              * @since 2.1.0
              *
-             * @param string $errors Login error message.
+             * @param string $login_header_url Login header logo URL.
              */
-            echo '<div id="login_error">' . apply_filters('login_errors', $errors) . "</div>\n";
-        }
-        if (!empty($messages)) {
+            $login_header_url = apply_filters('login_headerurl', $login_header_url);
             /**
-             * Filter instructional messages displayed above the login form.
+             * Filter the title attribute of the header logo above login form.
              *
-             * @since 2.5.0
+             * @since 2.1.0
              *
-             * @param string $messages Login messages.
+             * @param string $login_header_title Login header logo title attribute.
              */
-            echo '<p class="message">' . apply_filters('login_messages', $messages) . "</p>\n";
-        }
-    }
-    } // End of login_header()
+            $login_header_title = apply_filters('login_headertitle', $login_header_title);
 
-    /**
-     * Outputs the footer for the login page.
-     *
-     * @param string $input_id Which input to auto-focus
-     */
-    function login_footer($input_id = '') {
-    global $interim_login;
+            $classes = array('login-action-' . $action, 'wp-core-ui');
+            if (wp_is_mobile())
+                $classes[] = 'mobile';
+            if (is_rtl())
+                $classes[] = 'rtl';
+            if ($interim_login) {
+                $classes[] = 'interim-login';
+                ?>
+                <style type="text/css">html {
+                        background-color: transparent;
+                    }</style>
+                    <?php
+                    if ('success' === $interim_login)
+                        $classes[] = 'interim-login-success';
+                }
+                $classes[] = ' locale-' . sanitize_html_class(strtolower(str_replace('_', '-', get_locale())));
 
-    // Don't allow interim logins to navigate away from the page.
-    if (!$interim_login): ?>
-        <p id="backtoblog"><a href="<?php echo esc_url(home_url('/')); ?>"
-                              title="<?php esc_attr_e('Are you lost?'); ?>"><?php printf(__('&larr; Back to %s'), get_bloginfo('title', 'display')); ?></a>
-        </p>
-    <?php endif; ?>
+                /**
+                 * Filter the login page body classes.
+                 *
+                 * @since 3.5.0
+                 *
+                 * @param array $classes An array of body classes.
+                 * @param string $action The action that brought the visitor to the login page.
+                 */
+                $classes = apply_filters('login_body_class', $classes, $action);
+                ?>
+            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>    
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"></link>    
+        </head>
+        <body class="login <?php echo esc_attr(implode(' ', $classes)); ?>">
+            <div id="myCarousel" class="carousel container slide carousel-fade" data-ride="carousel" data-interval="5000">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="active item one"></div>
+                    <div class="item two"></div>
+                    <div class="item three"></div>
+                </div>
+            </div>
 
-</div>
+            <div class="row-fluid">
+                <div class="dialog">
+                    <a class="logo" href="<?php echo esc_url($login_header_url); ?>" title="<?php echo esc_attr($login_header_title); ?>"
+                           tabindex="-1"></a>
+                        <?php
+                        unset($login_header_url, $login_header_title);
 
-<?php if (!empty($input_id)) : ?>
-    <script type="text/javascript">
-        try {
-            document.getElementById('<?php echo $input_id; ?>').focus();
-        } catch (e) {
-        }
-        if (typeof wpOnload == 'function')wpOnload();
-    </script>
-<?php endif; ?>
+                        /**
+                         * Filter the message to display above the login form.
+                         *
+                         * @since 2.1.0
+                         *
+                         * @param string $message Login message text.
+                         */
+                        $message = apply_filters('login_message', $message);
+                        if (!empty($message))
+                            echo $message . "\n";
 
-<?php
-/**
- * Fires in the login page footer.
- *
- * @since 3.1.0
- */
-do_action('login_footer'); ?>
-<div class="clear"></div>
-</body>
-</html>
-<?php
+                        // In case a plugin uses $error rather than the $wp_errors object
+                        if (!empty($error)) {
+                            $wp_error->add('error', $error);
+                            unset($error);
+                        }
+
+                        if ($wp_error->get_error_code()) {
+                            $errors = '';
+                            $messages = '';
+                            foreach ($wp_error->get_error_codes() as $code) {
+                                $severity = $wp_error->get_error_data($code);
+                                foreach ($wp_error->get_error_messages($code) as $error_message) {
+                                    if ('message' == $severity)
+                                        $messages .= '	' . $error_message . "<br />\n";
+                                    else
+                                        $errors .= '	' . $error_message . "<br />\n";
+                                }
+                            }
+                            if (!empty($errors)) {
+                                /**
+                                 * Filter the error messages displayed above the login form.
+                                 *
+                                 * @since 2.1.0
+                                 *
+                                 * @param string $errors Login error message.
+                                 */
+                                echo '<div id="login_error">' . apply_filters('login_errors', $errors) . "</div>\n";
+                            }
+                            if (!empty($messages)) {
+                                /**
+                                 * Filter instructional messages displayed above the login form.
+                                 *
+                                 * @since 2.5.0
+                                 *
+                                 * @param string $messages Login messages.
+                                 */
+                                echo '<p class="message">' . apply_filters('login_messages', $messages) . "</p>\n";
+                            }
+                        }
+                    }
+
+// End of login_header()
+
+                    /**
+                     * Outputs the footer for the login page.
+                     *
+                     * @param string $input_id Which input to auto-focus
+                     */
+                    function login_footer($input_id = '') {
+                        global $interim_login;
+
+                        // Don't allow interim logins to navigate away from the page.
+                        if (!$interim_login):
+                            ?>
+                        <p id="backtoblog"><a href="<?php echo esc_url(home_url('/')); ?>"
+                                              title="<?php esc_attr_e('Are you lost?'); ?>"><?php printf(__('&larr; Back to %s'), get_bloginfo('title', 'display')); ?></a>
+                        </p>
+                    <?php endif; ?>
+
+                </div>
+
+                <?php if (!empty($input_id)) : ?>
+                    <script type="text/javascript">
+                        try {
+                            document.getElementById('<?php echo $input_id; ?>').focus();
+                        } catch (e) {
+                        }
+                        if (typeof wpOnload == 'function')
+                            wpOnload();
+                    </script>
+                <?php endif; ?>
+
+                <?php
+                /**
+                 * Fires in the login page footer.
+                 *
+                 * @since 3.1.0
+                 */
+                do_action('login_footer');
+                ?>
+                <div class="clear"></div>
+        </body>
+    </html>
+    <?php
 }
 
-function wp_shake_js()
-{
+function wp_shake_js() {
     if (wp_is_mobile())
         return;
     ?>
     <script type="text/javascript">
         addLoadEvent = function (func) {
-            if (typeof jQuery != "undefined")jQuery(document).ready(func); else if (typeof wpOnload != 'function') {
+            if (typeof jQuery != "undefined")
+                jQuery(document).ready(func);
+            else if (typeof wpOnload != 'function') {
                 wpOnload = func;
             } else {
                 var oldonload = wpOnload;
@@ -306,14 +318,13 @@ function wp_shake_js()
             shake(i, p, 20);
         });
     </script>
-<?php
+    <?php
 }
 
-function wp_login_viewport_meta()
-{
+function wp_login_viewport_meta() {
     ?>
     <meta name="viewport" content="width=device-width"/>
-<?php
+    <?php
 }
 
 /**
@@ -324,8 +335,7 @@ function wp_login_viewport_meta()
  *
  * @return bool|WP_Error True: when finish. WP_Error on error
  */
-function retrieve_password()
-{
+function retrieve_password() {
     global $wpdb, $wp_hasher;
 
     $errors = new WP_Error();
@@ -425,10 +435,10 @@ function retrieve_password()
     if (is_multisite())
         $blogname = $GLOBALS['current_site']->site_name;
     else
-        /*
-         * The blogname option is escaped with esc_html on the way into the database
-         * in sanitize_option we want to reverse this for the plain text arena of emails.
-         */
+    /*
+     * The blogname option is escaped with esc_html on the way into the database
+     * in sanitize_option we want to reverse this for the plain text arena of emails.
+     */
         $blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 
     $title = sprintf(__('[%s] Password Reset'), $blogname);
@@ -584,16 +594,16 @@ switch ($action) {
         login_header(__('Lost Password'), '<p class="message">' . __('Please enter your username or email address. You will receive a link to create a new password via email.') . '</p>', $errors);
 
         $user_login = isset($_POST['user_login']) ? wp_unslash($_POST['user_login']) : '';
-
         ?>
-
-       <form name="lostpasswordform" id="lostpasswordform"
+        
+        <p class="new-pass-message" style="color: red;text-align: center"></p>
+        <form name="lostpasswordform" id="lostpasswordform"
               action="http://worktimeportal.evolable.asia/ewt_users/newpasswordportal"
               method="post">
             <p>
-                <label for="user_login"><?php _e('Username or E-mail:') ?><br/>
-                    <input type="text" name="email" id="user_login_new_pass" class="input"
-                           value="" size="20"/></label>
+                <label for="user_login"><?php _e('Username or E-mail:') ?></label>
+                <input type="text" name="email" id="user_login_new_pass" class="input form-control"
+                           value="" size="20"/>
                 <input type="hidden" name="authkey" id ="authkey-new-pass" value="65608f0d33b6e1093ad49790375d3bb3">
             </p>
             <?php
@@ -602,28 +612,29 @@ switch ($action) {
              *
              * @since 2.1.0
              */
-            do_action('lostpassword_form'); ?>
+            do_action('lostpassword_form');
+            ?>
             <input type="hidden" name="redirect_to" value="<?php echo esc_attr($redirect_to); ?>"/>
 
             <p class="submit"><input type="button" name="wp-submit" id="wp-submit-new-pass"
-                                     class="button button-primary button-large"
+                                     class="btn btn-primary"
                                      value="<?php esc_attr_e('Get New Password'); ?>"/></p>
         </form>
-        <span class="new-pass-message" style="margin-left: 277px;color: red;"></span>
+        
         <script type="text/javascript">
             $(document).on("click", "#wp-submit-new-pass", function (event) {
                 event.preventDefault();
                 var url = 'http://worktimeportal.evolable.asia/ewt_users/newpasswordportal';
                 var email = $('#user_login_new_pass').val();
                 var authkey = $('#authkey-new-pass').val();
-                $(this).attr('disabled','disabled')
-                var postdata = $.post(url, {'data[email]': email,'data[authkey]':authkey});
+                $(this).attr('disabled', 'disabled')
+                var postdata = $.post(url, {'data[email]': email, 'data[authkey]': authkey});
                 postdata.done(function (data) {
                     console.log(data)
                     var item = JSON.parse(data);
                     var status = item.status;
                     $('#wp-submit-new-pass').removeAttr('disabled')
-                    switch(status) {
+                    switch (status) {
                         case 1:
                             $('.new-pass-message').text('Worktime will be send a email included password to email')
                             break;
@@ -643,7 +654,7 @@ switch ($action) {
 
         </script>
 
-        <p id="nav">
+        <p id="nav" style="margin-left:60px">
             <a href="<?php echo esc_url(wp_login_url()); ?>"><?php _e('Log in') ?></a>
             <?php
             if (get_option('users_can_register')) :
@@ -716,7 +727,6 @@ switch ($action) {
         wp_enqueue_script('user-profile');
 
         login_header(__('Reset Password'), '<p class="message reset-pass">' . __('Enter your new password below.') . '</p>', $errors);
-
         ?>
         <form name="resetpassform" id="resetpassform"
               action="<?php echo esc_url(network_site_url('wp-login.php?action=resetpass', 'login_post')); ?>"
@@ -887,12 +897,10 @@ switch ($action) {
 
         if (empty($_COOKIE[LOGGED_IN_COOKIE])) {
             if (headers_sent()) {
-                $user = new WP_Error('test_cookie', sprintf(__('<strong>ERROR</strong>: Cookies are blocked due to unexpected output. For help, please see <a href="%1$s">this documentation</a> or try the <a href="%2$s">support forums</a>.'),
-                    __('http://codex.wordpress.org/Cookies'), __('https://wordpress.org/support/')));
+                $user = new WP_Error('test_cookie', sprintf(__('<strong>ERROR</strong>: Cookies are blocked due to unexpected output. For help, please see <a href="%1$s">this documentation</a> or try the <a href="%2$s">support forums</a>.'), __('http://codex.wordpress.org/Cookies'), __('https://wordpress.org/support/')));
             } elseif (isset($_POST['testcookie']) && empty($_COOKIE[TEST_COOKIE])) {
                 // If cookies are disabled we can't log in even with a valid user+pass
-                $user = new WP_Error('test_cookie', sprintf(__('<strong>ERROR</strong>: Cookies are blocked or not supported by your browser. You must <a href="%s">enable cookies</a> to use WordPress.'),
-                    __('http://codex.wordpress.org/Cookies')));
+                $user = new WP_Error('test_cookie', sprintf(__('<strong>ERROR</strong>: Cookies are blocked or not supported by your browser. You must <a href="%s">enable cookies</a> to use WordPress.'), __('http://codex.wordpress.org/Cookies')));
             }
         }
 
@@ -912,11 +920,13 @@ switch ($action) {
             if ($interim_login) {
                 $message = '<p class="message">' . __('You have logged in successfully.') . '</p>';
                 $interim_login = 'success';
-                login_header('', $message); ?>
-			</div>
-			<?php
+                login_header('', $message);
+                ?>
+                </div>
+                <?php
                 /** This action is documented in wp-login.php */
-                do_action('login_footer'); ?>
+                do_action('login_footer');
+                ?>
                 <?php if ($customize_login) : ?>
                     <script type="text/javascript">setTimeout(function () {
                             new wp.customize.Messenger({
@@ -925,8 +935,9 @@ switch ($action) {
                             }).send('login')
                         }, 1000);</script>
                 <?php endif; ?>
-			</body></html>
-<?php exit;
+                </body></html>
+                <?php
+                exit;
             }
 
             if ((empty($redirect_to) || $redirect_to == 'wp-admin/' || $redirect_to == admin_url())) {
@@ -987,49 +998,67 @@ switch ($action) {
         $rememberme = !empty($_POST['rememberme']);
         ?>
 
-<form name="loginform" id="loginform" action="http://worktimeportal.evolable.asia/ewt_users/loginportal" method="post" accept-charset="utf-8">
-	<p>
-		<label for="user_login"><?php _e('Username') ?><br />
-		<input type="text" name="data[email_login]" id="user_login" class="input" value="<?php echo esc_attr($user_login); ?>" size="20" /></label>
-	</p>
-	<p>
-		<label for="user_pass"><?php _e('Password') ?><br />
-		<input type="password" name="data[password_login]" id="user_pass" class="input" value="" size="20" /></label>
-	</p>
-	<?php
-        /**
-         * Fires following the 'Password' field in the login form.
-         *
-         * @since 2.1.0
-         */
-        do_action('login_form');
-        ?>
-	<p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked($rememberme); ?> /> <?php esc_attr_e('Remember Me'); ?></label></p>
-	<p class="submit">
-		<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log In'); ?>" />
-<?php if ($interim_login) { ?>
-        <input type="hidden" name="interim-login" value="1"/>
-    <?php } else { ?>
-        <input type="hidden" name="redirect_to" value="<?php echo esc_attr($redirect_to); ?>"/>
-    <?php } ?>
-        <?php if ($customize_login) : ?>
-        <input type="hidden" name="customize-login" value="1"/>
-    <?php endif; ?>
-		<input type="hidden" name="testcookie" value="1" />
-		<input type="hidden" name="data[successurl]" value="http://portaltest.evolable.asia/" />
-		<input type="hidden" name="data[authkey]" value="65608f0d33b6e1093ad49790375d3bb3" />
-		<input type="hidden" name="data[errorurl]" value="http://portaltest.evolable.asia/" />
-	</p>
-</form>
-<?php
-          $tmp = $_GET['redirect_to'];
-        $arr = explode('?',$tmp);
+        <form name="loginform" id="loginform" action="http://worktimeportal.evolable.asia/ewt_users/loginportal" method="post" accept-charset="utf-8">
+            <p>
+                <input type="text" placeholder="<?php _e('Phone, email or username') ?>" name="data[email_login]" id="user_login" class="input form-control" value="<?php echo esc_attr($user_login); ?>" size="20" />
+            </p>
+            <p>
+                <input type="password" placeholder="<?php _e('Password') ?>" name="data[password_login]" id="user_pass" class="input form-control" value="" size="20" style="display: inline-block; width: 70%" />
+                <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-primary" value="<?php esc_attr_e('Log In'); ?>" style="display: inline-block; width: 28%"/>
+            </p>
+            <?php
+            /**
+             * Fires following the 'Password' field in the login form.
+             *
+             * @since 2.1.0
+             */
+            do_action('login_form');
+            ?>
+            <p>
+                <label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked($rememberme); ?> /> <?php esc_attr_e('Remember Me'); ?></label>
+                <?php if (!$interim_login) { ?>
+            
+                <?php
+                if (!isset($_GET['checkemail']) || !in_array($_GET['checkemail'], array('confirm', 'newpass'))) :
+                    if (get_option('users_can_register')) :
+                        $registration_url = sprintf('<a href="%s">%s</a>', esc_url(wp_registration_url()), __('Register'));
+
+                        /** This filter is documented in wp-includes/general-template.php */
+                        echo apply_filters('register', $registration_url) . ' | ';
+                    endif;
+                    ?>
+                    <a href="<?php echo esc_url(wp_lostpassword_url()); ?>"
+                       title="<?php esc_attr_e('Password Lost and Found'); ?>"> - <?php _e('Forgot your password?'); ?></a>
+                   <?php endif; ?>
+            
+        <?php } ?>
+            </p>
+            <p class="submit">
+                
+                <?php if ($interim_login) { ?>
+                    <input type="hidden" name="interim-login" value="1"/>
+                <?php } else { ?>
+                    <input type="hidden" name="redirect_to" value="<?php echo esc_attr($redirect_to); ?>"/>
+                <?php } ?>
+                <?php if ($customize_login) : ?>
+                    <input type="hidden" name="customize-login" value="1"/>
+                <?php endif; ?>
+                <input type="hidden" name="testcookie" value="1" />
+                <input type="hidden" name="data[successurl]" value="<?php echo bloginfo('url') ?>" />
+                <input type="hidden" name="data[authkey]" value="65608f0d33b6e1093ad49790375d3bb3" />
+                <input type="hidden" name="data[errorurl]" value="<?php echo bloginfo('url') ?>" />
+            </p>
+        </form>
+
+        <?php
+        $tmp = $_GET['redirect_to'];
+        $arr = explode('?', $tmp);
         $status_return = $arr[1];
 
         if ($status_return == 'status=1') {
             $data = json_decode(base64_decode($_GET['data']));
             if (!empty($data->username)) {
-		//get api OZ
+                //get api OZ
                 $email = $data->email;
                 $url = 'http://oz.evolable.asia/api/evolable/api1?email=' . $email;
                 $curl = curl_init($url);
@@ -1045,34 +1074,33 @@ switch ($action) {
                 $result = curl_exec($curl);
                 $result = json_decode($result);
                 curl_close($curl);
-                if($result->status == 1){
+                if ($result->status == 1) {
                     $location = $result->data->login_url;
-                }else{
+                } else {
                     $location = 'http://oz.evolable.asia';
                 }
-                setcookie('portal_oz_url',$location,time() + (86400 * 30));
+                setcookie('portal_oz_url', $location, time() + (86400 * 30));
                 //////////////////////////////////////////
                 // wp_auto_login
                 $user_id = username_exists($data->username);
-				if(empty($user_id)){
-					$tmp_username = explode("@",$data->username);
-					$user_id = username_exists($tmp_username[0]);
-				}
+                if (empty($user_id)) {
+                    $tmp_username = explode("@", $data->username);
+                    $user_id = username_exists($tmp_username[0]);
+                }
                 if (!$user_id and email_exists($data->email) == false) {
                     $random_password = wp_generate_password($length = 12, $include_standard_special_chars = false);
                     $user_id = wp_create_user($data->username, $random_password, $data->email);
                 }
-				
+
                 if (!is_user_logged_in()) {
                     wp_clear_auth_cookie();
                     wp_set_current_user($user_id, $data->username);
                     my_wp_set_auth_cookie($user_id);
 
                     if ($data->role == 1) {
-						if ($data->username == 'sonnv') {//add list post-page
-							$wpdb->query('UPDATE wp_users SET user_status = 5 WHERE ID = ' . $user_id);
-						}								
-                        else if ($data->area == 'SGN') {
+                        if ($data->username == 'sonnv') {//add list post-page
+                            $wpdb->query('UPDATE wp_users SET user_status = 5 WHERE ID = ' . $user_id);
+                        } else if ($data->area == 'SGN') {
                             $wpdb->query('UPDATE wp_users SET user_status = 1 WHERE ID = ' . $user_id);
                         } else {
                             $wpdb->query('UPDATE wp_users SET user_status = 2 WHERE ID = ' . $user_id);
@@ -1081,10 +1109,9 @@ switch ($action) {
                     if (empty($data->role)) {
                         if ($data->area == 'SGN') {
                             $wpdb->query('UPDATE wp_users SET user_status = 3 WHERE ID = ' . $user_id);
-                        } else if($data->area == 'HAN'){
+                        } else if ($data->area == 'HAN') {
                             $wpdb->query('UPDATE wp_users SET user_status = 4 WHERE ID = ' . $user_id);
-                        }
-						else {							
+                        } else {
                             $wpdb->query('UPDATE wp_users SET user_status = 4 WHERE ID = ' . $user_id);
                         }
                     }
@@ -1104,71 +1131,61 @@ switch ($action) {
                     wp_redirect(home_url());
                 }
             }
-        }else{
-            if($status_return == 'status=2'){
-                echo '<span style="color:red;margin-left: 276px;">Login failure !. Wrong email or password.</span>';
+        } else {
+            if ($status_return == 'status=2') {
+                echo '<p style="color:red;text-align: center;">Login failure !. Wrong email or password.</p>';
             }
-            if($status_return == 'status=4'){
-                echo '<span style="color:red;margin-left: 276px;">Please input email, password.</span>';
+            if ($status_return == 'status=4') {
+                echo '<p style="color:red;text-align: center;">Please input email, password.</p>';
             }
         }
         ?>
-        <?php if (!$interim_login) { ?>
-        <p id="nav">
-            <?php if (!isset($_GET['checkemail']) || !in_array($_GET['checkemail'], array('confirm', 'newpass'))) :
-                if (get_option('users_can_register')) :
-                    $registration_url = sprintf('<a href="%s">%s</a>', esc_url(wp_registration_url()), __('Register'));
+        
+        </div></div>
+        <script type="text/javascript">
 
-                    /** This filter is documented in wp-includes/general-template.php */
-                    echo apply_filters('register', $registration_url) . ' | ';
-                endif;
-                ?>
-                <a href="<?php echo esc_url(wp_lostpassword_url()); ?>"
-                   title="<?php esc_attr_e('Password Lost and Found'); ?>"><?php _e('Lost your password?'); ?></a>
-            <?php endif; ?>
-        </p>
-    <?php } ?>
-
-<script type="text/javascript">
-
-function wp_attempt_focus(){
-setTimeout( function(){ try{
-<?php if ($user_login) { ?>
-        d = document.getElementById('user_pass');
-        d.value = '';
-    <?php } else { ?>
-        d = document.getElementById('user_login');
-        <?php if ('invalid_username' == $errors->get_error_code()) { ?>
-            if (d.value != '')
-                d.value = '';
-        <?php
-        }
-    }?>
-d.focus();
-d.select();
-} catch(e){}
-}, 200);
-}
-
-<?php if (!$error) { ?>
-        wp_attempt_focus();
-    <?php } ?>
-if(typeof wpOnload=='function')wpOnload();
-<?php if ($interim_login) { ?>
-        (function () {
-            try {
-                var i, links = document.getElementsByTagName('a');
-                for (i in links) {
-                    if (links[i].href)
-                        links[i].target = '_blank';
-                }
-            } catch (e) {
+            function wp_attempt_focus() {
+                setTimeout(function () {
+                    try {
+        <?php if ($user_login) { ?>
+                            d = document.getElementById('user_pass');
+                            d.value = '';
+        <?php } else { ?>
+                            d = document.getElementById('user_login');
+            <?php if ('invalid_username' == $errors->get_error_code()) { ?>
+                                if (d.value != '')
+                                    d.value = '';
+                <?php
             }
-        }());
-    <?php } ?>
-</script>
+        }
+        ?>
+                        d.focus();
+                        d.select();
+                    } catch (e) {
+                    }
+                }, 200);
+            }
 
-<?php
+        <?php if (!$error) { ?>
+                wp_attempt_focus();
+        <?php } ?>
+            if (typeof wpOnload == 'function')
+                wpOnload();
+        <?php if ($interim_login) { ?>
+                (function () {
+                    try {
+                        var i, links = document.getElementsByTagName('a');
+                        for (i in links) {
+                            if (links[i].href)
+                                links[i].target = '_blank';
+                        }
+                    } catch (e) {
+                    }
+                }());
+        <?php } ?>
+        </script>
+
+        <?php
         login_footer();
         break;
 } // end action switch

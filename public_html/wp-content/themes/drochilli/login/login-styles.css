@@ -1,18 +1,89 @@
-h1 a {
+.carousel-fade .carousel-inner .item {
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0;
+}
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  transform: translate3d(0, 0, 0);
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+#myCarousel.carousel { z-index: -99; }
+#myCarousel.carousel .item {
+    position: fixed; 
+    width: 100%; height: 100%;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -ms-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+
+}
+#myCarousel.carousel .one {
+    background: url('slide3blur.jpg');
+    background-size: cover;
+    -moz-background-size: cover;
+}
+#myCarousel.carousel .two {
+    background: url('slide2blur.jpg');
+    background-size: cover;
+    -moz-background-size: cover;
+}
+#myCarousel.carousel .three {
+    background: url('slide1blur.jpg');
+    background-size: cover;
+    -moz-background-size: cover;
+}
+#myCarousel.carousel .active.left {
+    left:0;
+    opacity:0;
+    z-index:2;
+}
+
+a.logo {
     background-image: url(logo.png) !important;
-    background-position: left top !important;
-    width: 50% !important;
+    background-repeat:no-repeat;
+    width: 36% !important;
     background-size: auto !important;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    display: block;
+    height: 100px;
+    text-decoration: none;
+    text-align: center;
 }
 #login{
-    padding:0;
-    width:1204px;
+    margin-top: 18%;
+    //width:1204px;
+    width: 380px;
+    margin: 0 auto;
+}
+.dialog {
+    width: 480px;
+    margin: 0 auto;
+    margin-top: 120px;
+    background-color: #f5f5f5;
+    border: 2px solid #fafafa;
+    box-shadow: 2px 2px 2px #E5E5E5;
+    border-radius: 5px;
+    padding: 30px;
+    color: #127383;
 }
 .login form {
-    background-color: #afd5e2;
-    width: 50%;
+    //background-color: #afd5e2;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
 }
