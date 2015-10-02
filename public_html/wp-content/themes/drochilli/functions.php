@@ -201,7 +201,7 @@ function xxxx_update_post($post_id, $post) {
             case 'hanoi':
             case 'hcm':
             case 'all':
-
+            case 'document':
                 // HANDLE THE FILE UPLOAD
 
                 // If the upload field has a file in it

@@ -492,6 +492,8 @@ if (!class_exists("DjdSitePost")) {
                 $redirect_to = home_url() . "/?page_id=31";
             } else if ($page_id == '229') {
                 $redirect_to = home_url() . "/?page_id=221";
+            } else if ($page_id == '348') {
+                $redirect_to = home_url() . "/?page_id=19";
             } else {
                 $redirect_to = home_url();
             }

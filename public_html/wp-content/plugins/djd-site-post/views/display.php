@@ -156,12 +156,13 @@ function myplugin_tinymce_buttons($buttons)
                     'tab_index' => 0,
                     'hide_if_empty' => false
                 ); ?>
+                <?php if (!empty($_GET['page_id']) && $_GET['page_id'] != 348 ): ?>
                 <div class="form-group col-lg-12">
-                    <label class="col-lg-12"
-                        for="select_post_category"><?php echo($djd_options['djd-categories-label'] ? $djd_options['djd-categories-label'] : __('Select a Category', 'djd-site-post')); ?></label>
                     <?php if (!empty($_GET['page_id']) && $_GET['page_id'] == 66): ?>
+                    <label class="col-lg-12"
+                        for="select_post_category"><?php echo($djd_options['djd-categories-label'] ? $djd_options['djd-categories-label'] : __('Select a Category', 'djd-site-post')); ?></label>                    
                     <div class="col-lg-3"> 
-                        <select class="form-control" name="djd_site_post_select_category" id="djd_site_post_select_category" class="class=djd_site_post_form">
+                        <select class="form-control" name="djd_site_post_select_category" id="djd_site_post_select_category" class="djd_site_post_form">
                             <option class="level-0" value="3" <?php echo $term_employment=='3'?'selected':'';?>>All</option>
                             <option class="level-0" value="4" <?php echo $term_employment=='4'?'selected':'';?> >Employee</option>
                             <option class="level-0" value="5" <?php echo $term_employment=='5'?'selected':'';?>>Customer</option>
@@ -170,8 +171,10 @@ function myplugin_tinymce_buttons($buttons)
                     </div>
                     <?php endif; ?>
                     <?php if (!empty($_GET['page_id']) && $_GET['page_id'] == 199): ?>
+                     <label class="col-lg-12"
+                        for="select_post_category"><?php echo($djd_options['djd-categories-label'] ? $djd_options['djd-categories-label'] : __('Select a Category', 'djd-site-post')); ?></label>
                     <div class="col-lg-3"> 
-                        <select class="form-control" name="djd_site_post_select_category" id="djd_site_post_select_category" class="class=djd_site_post_form">
+                        <select class="form-control" name="djd_site_post_select_category" id="djd_site_post_select_category" class="djd_site_post_form">
                             <option class="level-0" value="8">初級クラス</option>
                             <option class="level-0" value="9">日本語能力</option>
                             <option class="level-0" value="10">日本語IT</option>
@@ -181,6 +184,7 @@ function myplugin_tinymce_buttons($buttons)
                     </div>
                     <?php endif; ?>
                 </div>
+                <?php endif; ?>
                     <?php //echo str_replace("&nbsp;", "&#160;", wp_dropdown_categories($args));
                     break;
                     case 'check':
@@ -276,6 +280,7 @@ function myplugin_tinymce_buttons($buttons)
                         <br><br>
                     </div>
                     <?php } ?>
+                <?php if (!empty($_GET['page_id']) && $_GET['page_id'] != 348 ): ?>
                 <div class="form-group col-lg-12">
 					<?php $posttp=$my_post->post_type;?>
                     <!--<span id="loading"></span>-->
@@ -286,10 +291,9 @@ function myplugin_tinymce_buttons($buttons)
                         <option value="hcm" <?php echo $posttp=='hcm'?'selected':'';?>>Ho Chi Minh</option>
                         <option value="hanoi" <?php echo $posttp=='hanoi'?'selected':'';?>>Hanoi</option>
                     </select>
-                    </div>
-                    <input type="hidden" name="action" value="process_site_post_form"/>
+                    </div>                    
                 </div>
-                
+                                
                 <div class="form-group col-lg-12">
                 <label class="col-lg-12"
                     for="djdsitepostcontent"><?php echo($djd_options['djd-content'] ? $djd_options['djd-content'] : __('Text', 'djd-site-post')); ?></label>    
@@ -307,8 +311,10 @@ function myplugin_tinymce_buttons($buttons)
                            value="<?php echo $no1 + $no2; ?>"/>
                 <?php } ?>
 		</div>
-                
-                    <div class="col-lg-2" style="padding-top: 40px">
+                </div>
+                <?php endif;?>
+                <div class="form-group col-lg-12" style="padding-top: 40px">
+                    <div class="col-lg-12"> 
 		<?php if ($filename != ''): ?>
                     <div id="show-attach-file">
                         Attach file: <span><?php echo $filename; ?></span> <button type="button" id="update-attach-file">Update attach file</button>
@@ -316,9 +322,15 @@ function myplugin_tinymce_buttons($buttons)
                 <?php else: ?>
                     <input type="file" name="xxxx_image">
                 <?php endif; ?>
+                    </div>
+                <input type="hidden" name="action" value="process_site_post_form"/>
+                <?php if (!empty($_GET['page_id']) && $_GET['page_id'] == 348 ): ?>
+                    <input type="hidden" id="djd-post-type" name="djd-post-type" value="document"/>
+                <?php endif?>
+                
 	  	<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
                 </div>
-                </div>
+            
                 <div id="post-back-btn" class="col-lg-12 text-center">
                     <button type="submit" class="send-button btn btn-warning"
                             id="submit"><?php echo($djd_options['djd-send-button'] ? $djd_options['djd-send-button'] : __('Publish', 'djd-site-post')); ?></button>
