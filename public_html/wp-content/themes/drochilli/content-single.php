@@ -21,11 +21,11 @@ if (!empty($attach_file)) {
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-1 pull-right text-right">
-        <div class="table-responsive">
+    <div class="pull-right text-right">
+        <div class="table-responsive table-bordered">
             <table class="table">
                 <thead><tr><td><?php the_author(); ?></td></tr></thead>
-                <tbody><tr><td><?php the_time(get_option('date_format')); ?></td></tr></tbody>
+                <tbody><tr><td nowrap><?php the_time(get_option('date_format')); ?></td></tr></tbody>
             </table>
         </div>
     </div>
@@ -47,7 +47,7 @@ if (!empty($attach_file)) {
         <?php if (is_user_logged_in() && get_current_user_id() == $post->post_author): ?>
         <br/>
         <p class="text-center">
-            <a class="btn btn-info" href="<?php print get_permalink(66); ?>&action=edit&post_id=<?php echo get_the_ID(); ?>">
+            <a class="btn btn-info" href="<?php print get_permalink(66); ?>?&action=edit&post_id=<?php echo get_the_ID(); ?>">
                <span class="glyphicon glyphicon-edit"></span> Edit
             </a>
             <a class="btn btn-danger" href="<?php echo get_delete_post_link(get_the_ID()); ?>" onclick="return check()" style="margin-left:20px">

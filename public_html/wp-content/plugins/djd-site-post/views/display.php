@@ -20,7 +20,7 @@ if (isset($_GET["post_id"])) {
     } else {
         $filename = '';
     }
-    echo $filename;
+    //echo $filename;
 } else {
     $my_post = '';
 }
@@ -156,9 +156,9 @@ function myplugin_tinymce_buttons($buttons)
                     'tab_index' => 0,
                     'hide_if_empty' => false
                 ); ?>
-                <?php if (!empty($_GET['page_id']) && $_GET['page_id'] != 348 ): ?>
+                <?php if (!is_page('document-post')): ?>
                 <div class="form-group col-lg-12">
-                    <?php if (!empty($_GET['page_id']) && $_GET['page_id'] == 66): ?>
+                    <?php if (is_page('infomation-post')): ?>
                     <label class="col-lg-12"
                         for="select_post_category"><?php echo($djd_options['djd-categories-label'] ? $djd_options['djd-categories-label'] : __('Select a Category', 'djd-site-post')); ?></label>                    
                     <div class="col-lg-3"> 
@@ -170,7 +170,7 @@ function myplugin_tinymce_buttons($buttons)
                         </select>
                     </div>
                     <?php endif; ?>
-                    <?php if (!empty($_GET['page_id']) && $_GET['page_id'] == 199): ?>
+                    <?php if (is_page('japanclasspost')): ?>
                      <label class="col-lg-12"
                         for="select_post_category"><?php echo($djd_options['djd-categories-label'] ? $djd_options['djd-categories-label'] : __('Select a Category', 'djd-site-post')); ?></label>
                     <div class="col-lg-3"> 
@@ -280,7 +280,7 @@ function myplugin_tinymce_buttons($buttons)
                         <br><br>
                     </div>
                     <?php } ?>
-                <?php if (!empty($_GET['page_id']) && $_GET['page_id'] != 348 ): ?>
+                <?php if (!is_page('document-post')): ?>
                 <div class="form-group col-lg-12">
 					<?php $posttp=$my_post->post_type;?>
                     <!--<span id="loading"></span>-->
@@ -324,11 +324,14 @@ function myplugin_tinymce_buttons($buttons)
                 <?php endif; ?>
                     </div>
                 <input type="hidden" name="action" value="process_site_post_form"/>
-                <?php if (!empty($_GET['page_id']) && $_GET['page_id'] == 348 ): ?>
+                <?php if (is_page('document-post')): ?>
                     <input type="hidden" id="djd-post-type" name="djd-post-type" value="document"/>
                 <?php endif?>
-                
-	  	<input type="hidden" name="page_id" value="<?php echo $page_id; ?>">
+                <?php
+                    global $post;
+                ?>
+                    
+	  	<input type="hidden" name="page_id" value="<?php echo $post->post_name; ?>">
                 </div>
             
                 <div id="post-back-btn" class="col-lg-12 text-center">
