@@ -21,7 +21,7 @@ get_header();
     </div>
     <div class="col-lg-3 text-right" style="padding-top: 10px;">
         <?php if (in_array($current_user->user_status, array(5, 6))): ?>
-            <a class="btn btn-warning btn-lg" href="./?page_id=348">
+            <a class="btn btn-warning btn-lg" href="./document-post">
                 New Document
             </a>
         <?php endif; ?>
