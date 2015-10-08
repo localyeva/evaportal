@@ -310,15 +310,18 @@ function delete_associated_media($post_id) {
         'post_status'    => 'any',
         'post_parent'    => $post_id
     ) );
-
     foreach ( $attachments as $attachment ) {
         if ( false === wp_delete_attachment( $attachment->ID,true ) ) {
             unlink(get_attached_file($attachment->ID));
         }
     }
-
+    
+    wp_redirect( home_url().'/'. $_GET['back'] );
+    exit;
 }
-add_action('before_delete_post', 'delete_associated_media');
+//add_action('before_delete_post', 'delete_associated_media');
+add_action( 'trashed_post', 'delete_associated_media', 10 );
+
 
 add_action('wp_head', 'set_active_menu', 10);
 

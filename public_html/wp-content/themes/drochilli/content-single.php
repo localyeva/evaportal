@@ -5,9 +5,11 @@ $meta_key = get_post_meta($post->ID, 'meta-post-type');
 switch ($meta_key[0]) {
     case 'information':
         $page = get_posts(array('name' => 'infomation-post', 'post_type' => 'page'));
+        $back = '';
         break;
     case 'document':
         $page = get_posts(array('name' => 'document-post', 'post_type' => 'page'));
+        $back = 'page2-2';
         break;
 }
 
@@ -63,7 +65,7 @@ if (!empty($attach_file)) {
                 <a class="btn btn-info" href="<?php print get_permalink($page[0]->ID); ?>?&action=edit&post_id=<?php echo get_the_ID(); ?>">
                     <span class="glyphicon glyphicon-edit"></span> Edit
                 </a>
-                <a class="btn btn-danger" href="<?php echo get_delete_post_link(get_the_ID()); ?>" onclick="return check()" style="margin-left:20px">
+                <a class="btn btn-danger" href="<?php echo get_delete_post_link(get_the_ID()).'&back='.$back; ?>" onclick="return check()" style="margin-left:20px">
                     <span class="glyphicon glyphicon-remove"></span> Delete
                 </a>
             </p>

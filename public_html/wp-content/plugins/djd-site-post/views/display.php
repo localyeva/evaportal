@@ -354,11 +354,18 @@ function myplugin_tinymce_buttons($buttons)
 <script type="text/javascript">
    //jQuery('#site_post_form').on('submit', ProcessFormAjax);
    $(document).on('click','#update-attach-file',function(){
-       if(!confirm('Are you sure delete this file?')) return false;
-window.location.href = location.href + '&delete_attach=1';
+       if(!confirm('Are you sure delete this file?')) 
+           return false;
+        //location.href = location.href + '&delete_attach=1';
         <?php //delete_associated_media($_GET["post_id"]); ?>
-        $('#show-attach-file').after('<input type="file" name="xxxx_image">');
-        $('#show-attach-file').empty();
+        $.ajax( location.href + '&delete_attach=1' )
+        .done(function() {
+            $('#show-attach-file').after('<input type="file" name="xxxx_image">');
+            $('#show-attach-file').empty();
+        })
+        .fail(function() {
+            alert( "Cannot delete file" );
+        })        
     })
 </script>
 <script>
