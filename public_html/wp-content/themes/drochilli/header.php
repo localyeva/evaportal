@@ -106,13 +106,14 @@ load_theme_textdomain('drochilli', get_template_directory() . '/languages/' . $l
                     <ul class="nav navbar-nav side-nav">
                         <li class="<?php echo $active_menus['information']?>"><a href="<?php echo home_url(); ?>"><i class="fa fa-fw fa-inbox"></i> Information</a></li>
                         <li class="<?php echo $active_menus['document']?>"><a href="<?php echo home_url(); ?>/?page_id=19"><i class="fa fa-fw fa-file"></i> Document</a></li>
-                        <li><a target="_blank" href="http://worktimeportal.evolable.asia/"><i class="fa fa-cogs"></i> Worktime</a></li>
-                        <li><a href="#"><i class="fa fa-university"></i> Knowledge (comming soon)</a></li>
-                        <li class="<?php echo $active_menus['japanese']?>"><a href="<?php echo home_url(); ?>/?page_id=31"><i class="fa fa-graduation-cap"></i> Japanese class</a></li>
-                        <li class="<?php echo $active_menus['contact']?>"><a href="<?php echo home_url(); ?>/?page_id=58"><i class="fa fa-envelope-o"></i> Contact</a></li>
-                        <li><a target="_blank" href="http://meeting.evolable.asia"><i class="fa fa-cog"></i> Booking system</a></li>
-                        <li><a title="oz-link" href="http://oz.evolable.asia/users/token/119dbafd37da453ceb968e4bb102d552" target="_blank"><i class="fa fa-external-link"></i> Oz</a></li>
                         <li class="<?php echo $active_menus['schedule']?>"><a href="<?php echo home_url(); ?>/?page_id=83"><i class="fa fa-calendar"></i> Schedule</a></li>
+                        <!--li><a href="#"><i class="fa fa-university"></i> Knowledge (comming soon)</a></li>
+                        <li class="<?php echo $active_menus['japanese']?>"><a href="<?php echo home_url(); ?>/?page_id=31"><i class="fa fa-graduation-cap"></i> Japanese class</a></li-->
+                        <li class="<?php echo $active_menus['contact']?>"><a href="<?php echo home_url(); ?>/?page_id=58"><i class="fa fa-envelope-o"></i> Contact</a></li>
+                        <li class="sepa-nav"></li>
+                        <li><a target="_blank" href="http://worktimeportal.evolable.asia/">Worktime <i class="fa fa-external-link"></i></a></li>
+                        <li><a target="_blank" href="http://meeting.evolable.asia">Booking system <i class="fa fa-external-link"></i></a></li>
+                        <li><a title="oz-link" href="http://oz.evolable.asia/users/token/119dbafd37da453ceb968e4bb102d552" target="_blank">Oz <i class="fa fa-external-link"></i></a></li>                        
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

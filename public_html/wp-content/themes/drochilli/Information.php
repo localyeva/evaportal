@@ -27,6 +27,7 @@ get_header();
         <?php endif; ?>
     </div>
 </div>
+
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-12">
@@ -65,6 +66,7 @@ get_header();
                     }
                     $paged = (get_query_var('page')) ? get_query_var('page') : 1;
                     $args = array(
+                        'meta_query' => array( array( 'key' => 'meta-post-type', 'value' => 'information' ) ),
                         'post_type' => $arr_post_type,
                         'tax_query' => array(
                             'relation' => 'OR',
@@ -94,7 +96,7 @@ get_header();
                             <tr>
                                 <td class="news_locate">
                                     <?php if (date('Y-m-d', strtotime($item->post_date)) == date('Y-m-d')): ?>
-                                        <span class="new_l">New!</span>
+                                        <span class="badge alert-danger">New!</span>
                                     <?php endif; ?>
                                     <?php echo $item->post_type == 'hcm' ? 'HCM' : ($item->post_type == 'hanoi' ? 'HAN' : 'ALL') ?>
                                 </td>

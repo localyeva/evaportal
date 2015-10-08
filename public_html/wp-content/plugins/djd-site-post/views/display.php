@@ -156,9 +156,8 @@ function myplugin_tinymce_buttons($buttons)
                     'tab_index' => 0,
                     'hide_if_empty' => false
                 ); ?>
-                <?php if (!is_page('document-post')): ?>
                 <div class="form-group col-lg-12">
-                    <?php if (is_page('infomation-post')): ?>
+                    <?php if (is_page('infomation-post') || is_page('document-post')): ?>
                     <label class="col-lg-12"
                         for="select_post_category"><?php echo($djd_options['djd-categories-label'] ? $djd_options['djd-categories-label'] : __('Select a Category', 'djd-site-post')); ?></label>                    
                     <div class="col-lg-3"> 
@@ -184,7 +183,6 @@ function myplugin_tinymce_buttons($buttons)
                     </div>
                     <?php endif; ?>
                 </div>
-                <?php endif; ?>
                     <?php //echo str_replace("&nbsp;", "&#160;", wp_dropdown_categories($args));
                     break;
                     case 'check':
@@ -279,8 +277,7 @@ function myplugin_tinymce_buttons($buttons)
                         </div>
                         <br><br>
                     </div>
-                    <?php } ?>
-                <?php if (!is_page('document-post')): ?>
+                    <?php } ?>                
                 <div class="form-group col-lg-12">
 					<?php $posttp=$my_post->post_type;?>
                     <!--<span id="loading"></span>-->
@@ -293,7 +290,7 @@ function myplugin_tinymce_buttons($buttons)
                     </select>
                     </div>                    
                 </div>
-                                
+                <?php if (!is_page('document-post')): ?>                
                 <div class="form-group col-lg-12">
                 <label class="col-lg-12"
                     for="djdsitepostcontent"><?php echo($djd_options['djd-content'] ? $djd_options['djd-content'] : __('Text', 'djd-site-post')); ?></label>    
@@ -323,14 +320,10 @@ function myplugin_tinymce_buttons($buttons)
                     <input type="file" name="xxxx_image">
                 <?php endif; ?>
                     </div>
-                <input type="hidden" name="action" value="process_site_post_form"/>
-                <?php if (is_page('document-post')): ?>
-                    <input type="hidden" id="djd-post-type" name="djd-post-type" value="document"/>
-                <?php endif?>
+                <input type="hidden" name="action" value="process_site_post_form"/>                
                 <?php
                     global $post;
-                ?>
-                    
+                ?>                    
 	  	<input type="hidden" name="page_id" value="<?php echo $post->post_name; ?>">
                 </div>
             

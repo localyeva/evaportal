@@ -1,5 +1,16 @@
 <?php
 global $post;
+
+$meta_key = get_post_meta($post->ID, 'meta-post-type');
+switch ($meta_key[0]) {
+    case 'information':
+        $page = get_posts(array('name' => 'infomation-post', 'post_type' => 'page'));
+        break;
+    case 'document':
+        $page = get_posts(array('name' => 'document-post', 'post_type' => 'page'));
+        break;
+}
+
 $category = get_the_category(get_the_ID());
 $category_name = $category[0]->name;
 $post_type = get_post_type(get_the_ID());
@@ -21,13 +32,15 @@ if (!empty($attach_file)) {
     </div>
 </div>
 <div class="row">
-    <div class="pull-right text-right">
-        <div class="table-responsive table-bordered">
-            <table class="table">
-                <thead><tr><td><?php the_author(); ?></td></tr></thead>
-                <tbody><tr><td nowrap><?php the_time(get_option('date_format')); ?></td></tr></tbody>
-            </table>
-        </div>
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-user"></i>  <?php the_author(); ?>
+            </li>
+            <li>
+                <i class="fa fa-calendar"></i> <?php the_time(get_option('date_format')); ?>
+            </li>
+        </ol>
     </div>
 </div>
 <div class="row">
@@ -45,15 +58,15 @@ if (!empty($attach_file)) {
     <div class="col-lg-12">
         <?php echo the_content(); ?>        
         <?php if (is_user_logged_in() && get_current_user_id() == $post->post_author): ?>
-        <br/>
-        <p class="text-center">
-            <a class="btn btn-info" href="<?php print get_permalink(66); ?>?&action=edit&post_id=<?php echo get_the_ID(); ?>">
-               <span class="glyphicon glyphicon-edit"></span> Edit
-            </a>
-            <a class="btn btn-danger" href="<?php echo get_delete_post_link(get_the_ID()); ?>" onclick="return check()" style="margin-left:20px">
-                <span class="glyphicon glyphicon-remove"></span> Delete
-            </a>
-        </p>
+            <br/>
+            <p class="text-center">
+                <a class="btn btn-info" href="<?php print get_permalink($page[0]->ID); ?>?&action=edit&post_id=<?php echo get_the_ID(); ?>">
+                    <span class="glyphicon glyphicon-edit"></span> Edit
+                </a>
+                <a class="btn btn-danger" href="<?php echo get_delete_post_link(get_the_ID()); ?>" onclick="return check()" style="margin-left:20px">
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                </a>
+            </p>
         <?php endif; ?>
     </div>
 </div>
@@ -62,7 +75,7 @@ if (!empty($attach_file)) {
         <?php if ($url_attach_file != ''): ?>
             <a class="btn btn-warning" href="<?php echo $url_attach_file; ?>"
                download="" title="Attach"><span class="glyphicon glyphicon-download"></span> Attach</a>
-        <?php endif; ?>
+           <?php endif; ?>
     </div>
     <div class="col-lg-6 text-right">        
         <a class="btn btn-warning btn-back" href="<?php echo wp_get_referer() ?>" title="Back">

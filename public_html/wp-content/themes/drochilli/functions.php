@@ -193,7 +193,12 @@ function xxxx_update_post($post_id, $post) {
     // It's also important to note that the save_post action can runs multiple times on every post save, so you need to check and make sure the
     // post type in the passed object isn't "revision"
     $post_type = $post->post_type;
-
+    if($_REQUEST['page_id'] == 'document-post'){
+        add_post_meta($post_id, 'meta-post-type', 'document', true);
+    }else if($_REQUEST['page_id'] == 'infomation-post'){
+        add_post_meta($post_id, 'meta-post-type', 'information', true);
+    }
+    
         // Logic to handle specific post types
         switch($post_type) {
 
@@ -201,7 +206,6 @@ function xxxx_update_post($post_id, $post) {
             case 'hanoi':
             case 'hcm':
             case 'all':
-            case 'document':
                 // HANDLE THE FILE UPLOAD
 
                 // If the upload field has a file in it

@@ -119,7 +119,12 @@ body {
         margin-top: 50px;
     }
 }
-
+.sepa-nav{
+    border: 1px solid #000;
+    width: 90%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
 .navbar-inverse {
     background-color: #eee;
     border-color: #ddd;
