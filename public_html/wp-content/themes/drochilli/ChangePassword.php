@@ -105,7 +105,7 @@ if (!empty($data->email) && $data->email == $current_user->user_email) {
             //alert("Passwords Do not match");
             document.getElementById("pass1").style.borderColor = "#E34234";
             document.getElementById("pass2").style.borderColor = "#E34234";
-            $('$wp-submi').attr('disabled', 'disabled')
+            //$('$wp-submi').attr('disabled', 'disabled')
         }
         else {
             if ($('#oldpass').val().length == 0) {
@@ -116,6 +116,16 @@ if (!empty($data->email) && $data->email == $current_user->user_email) {
 
         }
     });
+    $(function(){
+        var status = <?php echo !empty($_GET['?status'])?$_GET['?status']:0 ?>;
+        if(status > 0){
+            if(status == 1){
+                alert('Your password has been changed successfully!');
+            }else{
+                alert('Can not change your password!');
+            }
+        }
+    })    
 
 </script>
 
