@@ -19,9 +19,9 @@ get_header();
             </li>
         </ol-->
     </div>
-    <div class="col-lg-3 text-right" style="padding-top: 10px;">
+    <div class="col-lg-3 text-right" style="padding-top: 20px;">
         <?php if (in_array($current_user->user_status, array(5, 6))): ?>
-            <a class="btn btn-warning btn-lg" href="./?page_id=66">
+            <a class="btn btn-warning" href="./info-page/infomation-post">
                 New Post
             </a>
         <?php endif; ?>
