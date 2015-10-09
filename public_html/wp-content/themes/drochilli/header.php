@@ -113,7 +113,7 @@ load_theme_textdomain('drochilli', get_template_directory() . '/languages/' . $l
                         <li class="sepa-nav"></li>
                         <li><a target="_blank" href="http://worktimeportal.evolable.asia/">Worktime <i class="fa fa-external-link"></i></a></li>
                         <li><a target="_blank" href="http://meeting.evolable.asia">Booking system <i class="fa fa-external-link"></i></a></li>
-                        <li><a title="oz-link" href="http://oz.evolable.asia/users/token/119dbafd37da453ceb968e4bb102d552" target="_blank">Oz <i class="fa fa-external-link"></i></a></li>                        
+                        <li><a title="oz-link" href="http://oz.evolable.asia/" target="_blank">Oz <i class="fa fa-external-link"></i></a></li>                        
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
