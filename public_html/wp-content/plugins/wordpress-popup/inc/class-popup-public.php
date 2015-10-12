@@ -193,7 +193,7 @@ class IncPopup extends IncPopupBase {
 				}
 			}
 
-			lib2()->ui->add( PO_JS_URL . 'public.min.js', 'front' );
+			lib2()->ui->add( PO_JS_URL . 'public.js', 'front' );
 			lib2()->ui->add( PO_CSS_URL . 'animate.min.css', 'front' );
 		} else {
 			if ( is_array( $this->script_data ) && is_array( $this->script_data['popup'] ) ) {

@@ -54,7 +54,7 @@ class IncPopupRule_Popup extends IncPopupRule {
 	 */
 	protected function apply_count( $data, $popup ) {
 		$max_count = absint( $data );
-		$count = absint( @$_COOKIE['po_c-' . $popup->id] );
+		$count = absint( @$_COOKIE['po_c_'.@$_COOKIE['portal_username'].'-'. $popup->id] );
 		return $count < $max_count;
 	}
 

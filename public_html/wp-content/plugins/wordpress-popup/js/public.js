@@ -318,9 +318,25 @@
 				return false;
 			}
 
-			count = parseInt( me.get_cookie('po_c'), 10 );
+                        //customize
+                        var logined_id = "";
+                        var name = "portal_username=";
+                        var ca = document.cookie.split(';');console.log(ca);
+                        for(var i=0; i<ca.length; i++) {
+                            var c = ca[i];
+                            while (c.charAt(0)==' ') 
+                                c = c.substring(1);
+                            if (c.indexOf(name) == 0) {                                
+                                logined_id = c.substring(name.length,c.length);
+                                console.log(logined_id);
+                                break;
+                            }
+                        }
+                        //customize
+                        
+			count = parseInt( me.get_cookie('po_c_'+logined_id), 10 );
 			if ( isNaN( count ) ) { count = 0; }
-			me.set_cookie( 'po_c', count + 1, 365 );
+			me.set_cookie( 'po_c_'+logined_id, count + 1, 365 );
 
 			me.opened += 1;
 			$po_back.on( 'click', me.background_clicked );
