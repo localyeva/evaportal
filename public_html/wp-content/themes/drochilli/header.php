@@ -111,7 +111,7 @@ load_theme_textdomain('drochilli', get_template_directory() . '/languages/' . $l
                         <li class="<?php echo $active_menus['japanese']?>"><a href="<?php echo home_url(); ?>/?page_id=31"><i class="fa fa-graduation-cap"></i> Japanese class</a></li-->
                         <li class="<?php echo $active_menus['contact']?>"><a href="<?php echo home_url(); ?>/?page_id=58"><i class="fa fa-envelope-o"></i> Contact</a></li>
                         <li class="sepa-nav"></li>
-                        <li><a target="_blank" href="http://worktimeportal.evolable.asia/">Worktime <i class="fa fa-external-link"></i></a></li>
+                        <li><a target="_blank" href="http://worktime.evolable.asia/">Worktime <i class="fa fa-external-link"></i></a></li>
                         <li><a target="_blank" href="http://meeting.evolable.asia">Booking system <i class="fa fa-external-link"></i></a></li>
                         <li><a title="oz-link" href="http://oz.evolable.asia/" target="_blank">Oz <i class="fa fa-external-link"></i></a></li>                        
                     </ul>
