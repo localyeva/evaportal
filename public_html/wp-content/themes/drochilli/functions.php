@@ -204,6 +204,7 @@ function xxxx_update_post($post_id, $post) {
 
             // If this is a post. You can change this case to reflect your custom post slug
             case 'hanoi':
+            case 'danang':
             case 'hcm':
             case 'all':
                 // HANDLE THE FILE UPLOAD
