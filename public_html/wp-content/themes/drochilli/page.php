@@ -5,7 +5,13 @@
  */
 get_header();
 ?>
-
+<div class="row page-header">
+    <div class="col-lg-12">
+        <h1>
+            Schedule            
+        </h1>        
+    </div>
+</div>
 <div class="row" id="content">    
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
             <div class="col-lg-12" id="post-<?php the_ID(); ?>">

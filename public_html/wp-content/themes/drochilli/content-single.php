@@ -49,7 +49,7 @@ if (!empty($attach_file)) {
     <div class="col-lg-3">
         <div class="table-responsive">
             <table class="table">
-                <thead><tr><th>Location</th><th>Staff</th></tr></thead>
+                <thead><tr><th>Location</th><th>Target</th></tr></thead>
                 <tbody><tr><td><?php echo strtoupper($post_type) ?></td><td><?php echo $category_name; ?></td></tr></tbody>
             </table>
         </div>        

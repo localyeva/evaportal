@@ -4,6 +4,14 @@
  */
 get_header();
 ?>
+<!-- Page Heading -->
+<div class="row page-header">
+    <div class="col-lg-12">
+        <h1>
+            Contact            
+        </h1>        
+    </div>
+</div>
 <div class="row">
     <div class="col-lg-12">
         <div class="table-responsive" id="contact">

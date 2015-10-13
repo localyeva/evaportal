@@ -37,8 +37,8 @@ get_header();
                     <tr>
                         <th>Location</th>
                         <th>Date</th>
-                        <th>Staff</th>
-                        <th>Title</th>
+                        <th>Target</th>
+                        <th>Subject</th>
                     </tr>
                 </thead>
                 <tbody>

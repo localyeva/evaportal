@@ -101,7 +101,7 @@ function myplugin_tinymce_buttons($buttons)
                    name="djd-our-author" <?php if ($my_post) echo "value='" . $my_post->post_author . "'"; ?> />
             <div class="form-group col-lg-12">
                 <label class="col-lg-12" for="djd_site_post_titel">
-                    <?php echo($djd_options['djd-title'] ? $djd_options['djd-title'] : __('Title', 'djd-site-post')); ?>
+                    <?php echo($djd_options['djd-title'] ? $djd_options['djd-title'] : __('Subject', 'djd-site-post')); ?>
                 </label>
                 <div class="col-lg-6"> 
                     <input class="form-control" type="text" <?php if ($djd_options['djd-title-required'] == "1") echo "required='required'"; ?>
@@ -159,7 +159,7 @@ function myplugin_tinymce_buttons($buttons)
                 <div class="form-group col-lg-12">
                     <?php if (is_page('infomation-post') || is_page('document-post')): ?>
                     <label class="col-lg-12"
-                        for="select_post_category"><?php echo($djd_options['djd-categories-label'] ? $djd_options['djd-categories-label'] : __('Select a Category', 'djd-site-post')); ?></label>                    
+                        for="select_post_category">Target</label>                    
                     <div class="col-lg-3"> 
                         <select class="form-control" name="djd_site_post_select_category" id="djd_site_post_select_category" class="djd_site_post_form">
                             <option class="level-0" value="3" <?php echo $term_employment=='3'?'selected':'';?>>All</option>
@@ -294,7 +294,7 @@ function myplugin_tinymce_buttons($buttons)
                 <?php if (!is_page('document-post')): ?>                
                 <div class="form-group col-lg-12">
                 <label class="col-lg-12"
-                    for="djdsitepostcontent"><?php echo($djd_options['djd-content'] ? $djd_options['djd-content'] : __('Text', 'djd-site-post')); ?></label>    
+                    for="djdsitepostcontent"><?php echo($djd_options['djd-content'] ? $djd_options['djd-content'] : __('Content', 'djd-site-post')); ?></label>    
                 <div class="col-lg-12"> 
                 <?php
                 wp_editor($editor_content, 'djdsitepostcontent', $settings);                
