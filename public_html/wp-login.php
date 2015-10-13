@@ -158,7 +158,7 @@ function login_header($title = 'Log In', $message = '', $wp_error = '') {
             <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"></link>    
         </head>
         <body class="login <?php echo esc_attr(implode(' ', $classes)); ?>">
-            <div id="myCarousel" class="carousel container slide carousel-fade" data-ride="carousel" data-interval="5000">
+            <div id="myCarousel" class="carousel container slide carousel-fade" data-ride="carousel" data-interval="7000">
                 <!-- Carousel items -->
                 <div class="carousel-inner">
                     <div class="active item one"></div>
