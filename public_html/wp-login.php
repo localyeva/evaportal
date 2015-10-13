@@ -598,7 +598,7 @@ switch ($action) {
         
         <p class="new-pass-message" style="color: red;text-align: center"></p>
         <form name="lostpasswordform" id="lostpasswordform"
-              action="http://worktimeportal.evolable.asia/ewt_users/newpasswordportal"
+              action="<?php echo WORKTIME_PORTAL_URL?>ewt_users/newpasswordportal"
               method="post">
             <p>
                 <label for="user_login"><?php _e('Username or E-mail:') ?></label>
@@ -624,7 +624,7 @@ switch ($action) {
         <script type="text/javascript">
             $(document).on("click", "#wp-submit-new-pass", function (event) {
                 event.preventDefault();
-                var url = 'http://worktimeportal.evolable.asia/ewt_users/newpasswordportal';
+                var url = '<?php echo WORKTIME_PORTAL_URL?>ewt_users/newpasswordportal';
                 var email = $('#user_login_new_pass').val();
                 var authkey = $('#authkey-new-pass').val();
                 $(this).attr('disabled', 'disabled')
@@ -998,7 +998,7 @@ switch ($action) {
         $rememberme = !empty($_POST['rememberme']);
         ?>
 
-        <form name="loginform" id="loginform" action="http://worktimeportal.evolable.asia/ewt_users/loginportal" method="post" accept-charset="utf-8">
+        <form name="loginform" id="loginform" action="<?php echo WORKTIME_PORTAL_URL?>ewt_users/loginportal" method="post" accept-charset="utf-8">
             <p>
                 <input type="text" placeholder="<?php _e('Phone, email or username') ?>" name="data[email_login]" id="user_login" class="input form-control" value="<?php echo esc_attr($user_login); ?>" size="20" />
             </p>

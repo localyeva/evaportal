@@ -113,7 +113,9 @@ text-align: center;
 body {
     margin-top: 100px;
 }
-
+.page-header {
+    margin: 0px 0 20px;
+}
 @media(min-width:768px) {
     body {
         margin-top: 50px;

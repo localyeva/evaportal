@@ -36,6 +36,9 @@ define('DB_COLLATE', '');
 define('WPLANG', 'vi');
 define( 'WP_AUTO_UPDATE_CORE', false );
 
+define('WORKTIME_URL', 'http://worktime.evolable.asia/');
+define('WORKTIME_PORTAL_URL', 'http://worktime.evolable.asia/');
+//define('WORKTIME_PORTAL_URL', 'http://worktimeportal.evolable.asia/');
 /**#@+
  * Authentication Unique Keys and Salts.
  *

@@ -19,7 +19,7 @@ if (!empty($data->email) && $data->email == $current_user->user_email) {
     </div>
 </div>
 <div class="row">
-    <form id="changepassform" action="http://worktimeportal.evolable.asia/ewt_users/changepasswordportal" autocomplete="off"
+    <form id="changepassform" action="<?php echo WORKTIME_PORTAL_URL?>ewt_users/changepasswordportal" autocomplete="off"
           method="post" name="changepassform">
         <div class="form-group col-lg-12">
             <label class="col-lg-12" for="oldpass">Old password</label>
@@ -66,7 +66,7 @@ if (!empty($data->email) && $data->email == $current_user->user_email) {
     <div class="login">
         <p class="tit">Change your password</p>
 
-        <form id="changepassform" action="http://worktimeportal.evolable.asia/ewt_users/changepasswordportal" autocomplete="off"
+        <form id="changepassform" action="<?php echo WORKTIME_PORTAL_URL?>ewt_users/changepasswordportal" autocomplete="off"
               method="post" name="changepassform">
             <label
                 for="oldpass">Old password<input required id="oldpass" class="input" autocomplete="off"
