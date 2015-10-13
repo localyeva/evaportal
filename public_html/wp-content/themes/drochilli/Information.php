@@ -54,14 +54,20 @@ get_header();
                             break;
                         case 3:
                         case 4:
-                            $arr_post_type = array('all', 'hcm', 'hanoi');
+                        case 8:
+                            $arr_post_type = array('all', 'hcm', 'hanoi', 'danang');
                             $arr_category = array('all', 'customer');
                             break;
 
                         case 5:
                         case 6:
-                            $arr_post_type = array('all', 'hanoi', 'hcm');
-                            $arr_category = array('all', 'manager', 'customer', 'employee');
+                        case 9:
+                            $arr_post_type = array('all', 'hanoi', 'hcm', 'danang');
+                            $arr_category = array('all', 'manager', 'customer', 'employee');                  
+                            break;
+                        case 7:
+                            $arr_post_type = array('all', 'danang');
+                            $arr_category = array('all', 'employee');
                             break;
                     }
                     $paged = (get_query_var('page')) ? get_query_var('page') : 1;
@@ -98,7 +104,7 @@ get_header();
                                     <?php if (date('Y-m-d', strtotime($item->post_date)) == date('Y-m-d')): ?>
                                         <span class="badge alert-danger">New!</span>
                                     <?php endif; ?>
-                                    <?php echo $item->post_type == 'hcm' ? 'HCM' : ($item->post_type == 'hanoi' ? 'HAN' : 'ALL') ?>
+                                    <?php echo $item->post_type == 'hcm' ? 'HCM' : ($item->post_type == 'hanoi' ? 'HAN' : ($item->post_type == 'danang' ? 'DN' : 'ALL')) ?>
                                 </td>
                                 <td class="date">
                                     <?php echo date('Y-m-d', strtotime($item->post_date)) ?></td>

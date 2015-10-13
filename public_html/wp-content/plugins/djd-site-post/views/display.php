@@ -286,6 +286,7 @@ function myplugin_tinymce_buttons($buttons)
                     <select class="form-control" id="djd-post-type" name="djd-post-type">
                         <option value="all" <?php echo $posttp=='all'?'selected':'';?>>All</option>
                         <option value="hcm" <?php echo $posttp=='hcm'?'selected':'';?>>Ho Chi Minh</option>
+                        <option value="danang" <?php echo $posttp=='danang'?'selected':'';?>>Da Nang</option>
                         <option value="hanoi" <?php echo $posttp=='hanoi'?'selected':'';?>>Hanoi</option>
                     </select>
                     </div>                    
