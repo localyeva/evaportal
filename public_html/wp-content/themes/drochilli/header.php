@@ -83,7 +83,7 @@ load_theme_textdomain('drochilli', get_template_directory() . '/languages/' . $l
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user"></i> 
                             <?php
-                            global $current_user;
+                            global $current_user; //var_dump($current_user);
                             get_currentuserinfo();
                             // my_wp_set_auth_cookie($current_user->ID);
                             echo 'Welcome, ' . $current_user->user_login;

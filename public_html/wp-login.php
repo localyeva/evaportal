@@ -1056,7 +1056,12 @@ switch ($action) {
         $status_return = $arr[1];
 
         if ($status_return == 'status=1') {
-            $data = json_decode(base64_decode($_GET['data']));
+            $data = json_decode(base64_decode($_GET['data']));                       
+            if(empty($data->username)){
+                $parts = explode('@', $data->email);
+                $data->username = $parts[0];
+            }            
+            //var_dump($data);die();
             if (!empty($data->username)) {
                 //get api OZ
                 $email = $data->email;
@@ -1128,6 +1133,10 @@ switch ($action) {
 		    $admin_users = array('tutt', 'ito', 'khangld', 'haudv');
                     if (in_array($data->username, $admin_users)) {
                         $user_id = wp_update_user(array('ID' => $user_id, 'role' => "administrator"));
+                    }
+                    
+                    if ($data->area == 'Customers') {
+                        $user_id = wp_update_user(array('ID' => $user_id, 'role' => "customer"));
                     }
 
                     wp_redirect(home_url());
