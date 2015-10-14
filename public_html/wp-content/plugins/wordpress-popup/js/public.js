@@ -321,14 +321,14 @@
                         //customize
                         var logined_id = "";
                         var name = "portal_username=";
-                        var ca = document.cookie.split(';');console.log(ca);
+                        var ca = document.cookie.split(';');//console.log(ca);
                         for(var i=0; i<ca.length; i++) {
                             var c = ca[i];
                             while (c.charAt(0)==' ') 
                                 c = c.substring(1);
                             if (c.indexOf(name) == 0) {                                
                                 logined_id = c.substring(name.length,c.length);
-                                console.log(logined_id);
+                                //console.log(logined_id);
                                 break;
                             }
                         }
