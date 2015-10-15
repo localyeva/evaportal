@@ -31,6 +31,10 @@
     -o-transition: opacity 3s;
     transition: opacity 3s;
 }
+#myCarousel.carousel .bg{
+    background-size: cover !important;
+    -moz-background-size: cover !important;
+}
 #myCarousel.carousel .one {
     background: url('slide3blur.jpg');
     background-size: cover;

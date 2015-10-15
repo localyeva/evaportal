@@ -161,9 +161,21 @@ function login_header($title = 'Log In', $message = '', $wp_error = '') {
             <div id="myCarousel" class="carousel container slide carousel-fade" data-ride="carousel" data-interval="7000">
                 <!-- Carousel items -->
                 <div class="carousel-inner">
-                    <div class="active item one"></div>
-                    <div class="item two"></div>
-                    <div class="item three"></div>
+                    <?php
+                    $i=0;
+                    $args = array(
+                        'post_type' => array('admin-bg-slider')
+                    );
+                    $loop = new WP_Query($args);
+                    if ($loop->have_posts()){
+                        while ($loop->have_posts()) {
+                            $i++;
+                            $loop->the_post();
+
+                    ?>
+                    <div class="<?php echo $i==1?'active':''?> item bg" style="background: url('<?php echo get_field('image')?>');">
+                    </div>
+                    <?php }}?>
                 </div>
             </div>
 
