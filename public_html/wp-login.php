@@ -1134,21 +1134,22 @@ switch ($action) {
                         }
                     }
 
-                    if ($data->role > 1 && $data->role != null) {
-                        $user_id = wp_update_user(array('ID' => $user_id, 'role' => "editor"));
+                    if ($data->role > 1 && $data->role != null) {                        
                         if ($data->area == 'SGN') {
+                            $user_id = wp_update_user(array('ID' => $user_id, 'role' => "editor"));
                             $wpdb->query('UPDATE wp_users SET user_status = 5 WHERE ID = ' . $user_id);
-                        } else {
+                        } else if($data->area == 'Customers'){
+                            var_dump($user_id);
+                            $user_id = wp_update_user(array('ID' => $user_id, 'role' => "customer"));                            
+                            $wpdb->query('UPDATE wp_users SET user_status = 7 WHERE ID = ' . $user_id);
+                        }else{
+                            $user_id = wp_update_user(array('ID' => $user_id, 'role' => "editor"));
                             $wpdb->query('UPDATE wp_users SET user_status = 6 WHERE ID = ' . $user_id);
                         }
                     }
 		    $admin_users = array('tutt', 'ito', 'khangld', 'haudv');
                     if (in_array($data->username, $admin_users)) {
                         $user_id = wp_update_user(array('ID' => $user_id, 'role' => "administrator"));
-                    }
-                    
-                    if ($data->area == 'Customers') {
-                        $user_id = wp_update_user(array('ID' => $user_id, 'role' => "customer"));
                     }
 
                     wp_redirect(home_url());
