@@ -67,7 +67,7 @@ get_header();
                             break;
                         case 7:
                             $arr_post_type = array('all', 'danang');
-                            $arr_category = array('all', 'employee');
+                            $arr_category = array('all', 'customer');
                             break;
                     }
                     $paged = (get_query_var('page')) ? get_query_var('page') : 1;

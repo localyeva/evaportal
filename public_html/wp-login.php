@@ -1139,7 +1139,6 @@ switch ($action) {
                             $user_id = wp_update_user(array('ID' => $user_id, 'role' => "editor"));
                             $wpdb->query('UPDATE wp_users SET user_status = 5 WHERE ID = ' . $user_id);
                         } else if($data->area == 'Customers'){
-                            var_dump($user_id);
                             $user_id = wp_update_user(array('ID' => $user_id, 'role' => "customer"));                            
                             $wpdb->query('UPDATE wp_users SET user_status = 7 WHERE ID = ' . $user_id);
                         }else{

@@ -19,7 +19,7 @@ get_header();
             <?php //if ($current_user->user_status > 2): ?>
                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                         <?php the_content(); ?>
-                    <?php endwhile;
+                    <?php endwhile	;
                 endif; ?>
             <?php else: ?>            
                 <span style="color: #722d19;font-size: large">You do not have permission</span>
