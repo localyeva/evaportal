@@ -1075,6 +1075,7 @@ switch ($action) {
             }            
             //var_dump($data);die();
             if (!empty($data->username)) {
+                /*
                 //get api OZ
                 $email = $data->email;
                 $url = 'http://oz.evolable.asia/api/evolable/api1?email=' . $email;
@@ -1099,6 +1100,7 @@ switch ($action) {
                 setcookie('portal_oz_url', $location, time() + (86400 * 30));
                 setcookie('portal_username', $data->username, time() + (10 * 365 * 24 * 60 * 60));
                 //////////////////////////////////////////
+                */
                 // wp_auto_login
                 $user_id = username_exists($data->username);
                 if (empty($user_id)) {
