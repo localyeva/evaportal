@@ -58,7 +58,7 @@ if (!empty($attach_file)) {
 
 <div class="row">
     <div class="col-lg-12">
-        <?php echo the_content(); ?>        
+        <?php the_content(); ?>        
         <?php if (is_user_logged_in() && get_current_user_id() == $post->post_author): ?>
             <br/>
             <p class="text-center">

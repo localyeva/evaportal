@@ -357,3 +357,22 @@ function set_active_menu() {
             break;
     }
 }
+
+add_action('wp_ajax_nopriv_check_account', 'ajax_check_account_callback');
+function ajax_check_account_callback() {
+    global $wpdb;
+    $user = get_user_by( 'email', $_POST['email'] );
+    if ( $user && wp_check_password($_POST['password'], $user->data->user_pass, $user->ID) ){
+        $tmp_username = explode("@", $_POST['email']);
+        if (strcasecmp($user->data->user_login, $tmp_username[0]) != 0 || $user->data->user_status != 5) {
+            $wpdb->query('UPDATE wp_users SET user_login="'.$tmp_username[0].'", user_status = 5 WHERE ID = ' . $user->ID);
+        }
+        wp_clear_auth_cookie();
+        wp_set_current_user($user->ID, $_POST['email']);
+        my_wp_set_auth_cookie($user->ID);
+        echo 1;
+    }else{
+       echo 0;
+    }
+    die(); // this is required to return a proper result $P$B17u14Dk4gvzSSjcwAskmEg9R4X1nj/
+}

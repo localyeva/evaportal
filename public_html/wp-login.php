@@ -1016,7 +1016,7 @@ switch ($action) {
             </p>
             <p>
                 <input type="password" placeholder="<?php _e('Password') ?>" name="data[password_login]" id="user_pass" class="input form-control" value="" size="20" style="display: inline-block; width: 70%" />
-                <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-primary" value="<?php esc_attr_e('Log In'); ?>" style="display: inline-block; width: 28%"/>
+                <input type="button" name="wp-submit" id="btn-wp-login" class="btn btn-primary" value="<?php esc_attr_e('Log In'); ?>" style="display: inline-block; width: 28%"/>
             </p>
             <?php
             /**
@@ -1050,7 +1050,7 @@ switch ($action) {
                 <?php if ($interim_login) { ?>
                     <input type="hidden" name="interim-login" value="1"/>
                 <?php } else { ?>
-                    <input type="hidden" name="redirect_to" value="<?php echo esc_attr($redirect_to); ?>"/>
+                    <input type="hidden" name="redirect_to" id="redirect_to" value="<?php echo esc_attr($redirect_to); ?>"/>
                 <?php } ?>
                 <?php if ($customize_login) : ?>
                     <input type="hidden" name="customize-login" value="1"/>
@@ -1063,12 +1063,14 @@ switch ($action) {
         </form>
 
         <?php
+        
+        
         $tmp = $_GET['redirect_to'];
         $arr = explode('?', $tmp);
         $status_return = $arr[1];
 
         if ($status_return == 'status=1') {
-            $data = json_decode(base64_decode($_GET['data']));                       
+            $data = json_decode(base64_decode($_GET['data']."=="));                       
             if(empty($data->username)){
                 $parts = explode('@', $data->email);
                 $data->username = $parts[0];
@@ -1166,16 +1168,39 @@ switch ($action) {
                 }
             }
         } else {
+           
             if ($status_return == 'status=2') {
                 echo '<p style="color:red;text-align: center;">Login failure !. Wrong email or password.</p>';
             }
             if ($status_return == 'status=4') {
                 echo '<p style="color:red;text-align: center;">Please input email, password.</p>';
             }
-        }
+        } //var_dump(strcasecmp('Intern', 'intern'));
         ?>
         
         </div></div>
+        <script type="text/javascript">
+            var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+            jQuery(document).ready(function($) {
+                $('#btn-wp-login').click(function(){
+                    var data = {
+                        action: 'check_account',
+                        email: $('#user_login').val(),
+                        password: $('#user_pass').val()
+                    };
+
+                    $.post(ajaxurl, data, function(response) {
+                        //alert('Got this from the server: ' + response);
+                        if(response == 1){
+                            location.href = $('#redirect_to').val();
+                        }else{
+                            $('#loginform').submit();
+                        }
+                    }); 
+                });                
+            });
+        </script>
+        
         <script type="text/javascript">
 
             function wp_attempt_focus() {

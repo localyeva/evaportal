@@ -119,10 +119,11 @@ function myplugin_tinymce_buttons($buttons)
             <?php } ?>
             <?php
                 $settings = array(
-                    'media_buttons' => (boolean)$djd_options['djd-allow-media-upload'],
-                    'teeny' => $teeny,
-                    'wpautop' => false,
-                    'quicktags' => $show_quicktags
+//                    'media_buttons' => (boolean)$djd_options['djd-allow-media-upload'],
+//                    'teeny' => $teeny,
+//                    'wpautop' => false,
+//                    'quicktags' => $show_quicktags,
+//                    'editor_css' => '<style>body{line-height:1.4em;}</style>'
                 );
                 $editor_content = '';
                 if ($my_post) $editor_content = $my_post->post_content;
@@ -297,7 +298,7 @@ function myplugin_tinymce_buttons($buttons)
                     for="djdsitepostcontent"><?php echo($djd_options['djd-content'] ? $djd_options['djd-content'] : __('Content', 'djd-site-post')); ?></label>    
                 <div class="col-lg-12"> 
                 <?php
-                wp_editor($editor_content, 'djdsitepostcontent');                
+                wp_editor($editor_content, 'djdsitepostcontent', $settings);
                 if (($djd_options['djd-quiz']) && (!is_user_logged_in())) { ?>
                     <?php $no1 = mt_rand(1, 12);
                     $no2 = mt_rand(1, 12); ?>
