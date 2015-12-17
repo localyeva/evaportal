@@ -298,7 +298,7 @@ function myplugin_tinymce_buttons($buttons)
                     for="djdsitepostcontent"><?php echo($djd_options['djd-content'] ? $djd_options['djd-content'] : __('Content', 'djd-site-post')); ?></label>    
                 <div class="col-lg-12"> 
                 <?php
-                wp_editor($editor_content, 'djdsitepostcontent', $settings);
+                wp_editor($editor_content, 'djdsitepostcontent');
                 if (($djd_options['djd-quiz']) && (!is_user_logged_in())) { ?>
                     <?php $no1 = mt_rand(1, 12);
                     $no2 = mt_rand(1, 12); ?>
