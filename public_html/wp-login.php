@@ -1120,12 +1120,12 @@ switch ($action) {
                     my_wp_set_auth_cookie($user_id);
 
                     if ($data->role == 1) {
-                        if ($data->username == 'sonnv') {//add list post-page
-                            $wpdb->query('UPDATE wp_users SET user_status = 5 WHERE ID = ' . $user_id);
-                        } else if ($data->area == 'SGN') {
+                        if ($data->area == 'SGN') {
                             $wpdb->query('UPDATE wp_users SET user_status = 1 WHERE ID = ' . $user_id);
-                        } else {
+                        }else if ($data->area == 'HAN') {
                             $wpdb->query('UPDATE wp_users SET user_status = 2 WHERE ID = ' . $user_id);
+                        }else{
+                            $wpdb->query('UPDATE wp_users SET user_status = 8 WHERE ID = ' . $user_id);
                         }
                     }
                     if (empty($data->role)) {
@@ -1142,8 +1142,7 @@ switch ($action) {
                         if ($data->area == 'SGN') {
                             $user_id = wp_update_user(array('ID' => $user_id, 'role' => "editor"));
                             $wpdb->query('UPDATE wp_users SET user_status = 5 WHERE ID = ' . $user_id);
-                        } else if(strtolower ($data->area) == 'customers'){
-                            $user_id = wp_update_user(array('ID' => $user_id, 'role' => "customer"));                            
+                        } else if(strtolower ($data->area) == 'customers'){                     
                             $wpdb->query('UPDATE wp_users SET user_status = 7 WHERE ID = ' . $user_id);
                         }else{
                             $user_id = wp_update_user(array('ID' => $user_id, 'role' => "editor"));

@@ -43,31 +43,38 @@ get_header();
                 </thead>
                 <tbody>
                     <?php
+                    /*
+                     * $current_user->user_status:
+                     * case 1: hochiminh employee
+                     * case 2: hanoi employee 
+                     * case 8: danang employee              
+                     * case 3,4,7: customer 
+                     * case 5,6: manager
+                     * 
+                     */
                     switch ($current_user->user_status) {
                         case 1:
-                            $arr_post_type = array('all', 'hcm');
+                            $arr_post_type = array('all', 'hcm', 'hanoi', 'danang');
                             $arr_category = array('all', 'employee');
                             break;
                         case 2:
-                            $arr_post_type = array('all', 'hanoi');
+                            $arr_post_type = array('all', 'hcm', 'hanoi', 'danang');
+                            $arr_category = array('all', 'employee');
+                            break;
+                        case 8:
+                            $arr_post_type = array('all', 'hcm', 'hanoi', 'danang');
                             $arr_category = array('all', 'employee');
                             break;
                         case 3:
                         case 4:
-                        case 8:
+                        case 7:
                             $arr_post_type = array('all', 'hcm', 'hanoi', 'danang');
                             $arr_category = array('all', 'customer');
                             break;
-
                         case 5:
                         case 6:
-                        case 9:
                             $arr_post_type = array('all', 'hanoi', 'hcm', 'danang');
                             $arr_category = array('all', 'manager', 'customer', 'employee');                  
-                            break;
-                        case 7:
-                            $arr_post_type = array('all', 'danang');
-                            $arr_category = array('all', 'customer');
                             break;
                     }
                     $paged = (get_query_var('page')) ? get_query_var('page') : 1;
@@ -120,6 +127,7 @@ get_header();
                                 </td>
                             </tr>
                         <?php endforeach; ?>
+                        <?php wp_reset_postdata(); ?>
                     <?php endif; ?>
                 </tbody>
             </table>
