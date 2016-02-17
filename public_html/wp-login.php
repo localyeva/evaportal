@@ -608,16 +608,11 @@ switch ($action) {
         $user_login = isset($_POST['user_login']) ? wp_unslash($_POST['user_login']) : '';
         ?>
         
+        <div class="password-change"></div>
         <p class="new-pass-message" style="color: red;text-align: center"></p>
         <form name="lostpasswordform" id="lostpasswordform"
               action="<?php echo WORKTIME_PORTAL_URL?>ewt_users/newpasswordportal"
               method="post">
-            <p>
-                <label for="user_login"><?php _e('Username or E-mail:') ?></label>
-                <input type="text" name="email" id="user_login_new_pass" class="input form-control"
-                           value="" size="20"/>
-                <input type="hidden" name="authkey" id ="authkey-new-pass" value="65608f0d33b6e1093ad49790375d3bb3">
-            </p>
             <?php
             /**
              * Fires inside the lostpassword form tags, before the hidden fields.
@@ -627,10 +622,13 @@ switch ($action) {
             do_action('lostpassword_form');
             ?>
             <input type="hidden" name="redirect_to" value="<?php echo esc_attr($redirect_to); ?>"/>
-
-            <p class="submit"><input type="button" name="wp-submit" id="wp-submit-new-pass"
-                                     class="btn btn-primary"
-                                     value="<?php esc_attr_e('Get New Password'); ?>"/></p>
+            <p class="submit" style="text-align:center">
+                <!--input type="button" name="wp-submit" id="wp-submit-new-pass"
+                                     class="btn btn-warning"
+                                     value="<?php esc_attr_e('Get New Password'); ?>"/-->
+                <a href="<?php echo WORKTIME_PORTAL_URL.'ewt_users/login#forget_pass'?>" class="btn btn-warning"><?php _e('Get New Password') ?></a>
+                <a href="<?php echo esc_url(wp_login_url()); ?>" class="btn btn-primary"><?php _e('Log in') ?></a>
+            </p>
         </form>
         
         <script type="text/javascript">
@@ -666,8 +664,7 @@ switch ($action) {
 
         </script>
 
-        <p id="nav" style="margin-left:60px">
-            <a href="<?php echo esc_url(wp_login_url()); ?>"><?php _e('Log in') ?></a>
+        <p id="nav" style="margin-left:60px">            
             <?php
             if (get_option('users_can_register')) :
                 $registration_url = sprintf('<a href="%s">%s</a>', esc_url(wp_registration_url()), __('Register'));

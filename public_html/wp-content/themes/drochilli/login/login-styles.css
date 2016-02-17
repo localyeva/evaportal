@@ -67,6 +67,16 @@ a.logo {
     text-decoration: none;
     text-align: center;
 }
+
+.password-change {
+    background: url(password-change.gif) center top no-repeat;    
+    margin: 0 auto;
+    display: block;
+    height: 170px;
+    text-decoration: none;
+    text-align: center;
+}
+
 #login{
     margin-top: 18%;
     //width:1204px;
