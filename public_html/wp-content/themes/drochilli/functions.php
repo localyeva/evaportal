@@ -5,7 +5,7 @@
  */
 
 
-
+include_once (dirname(__FILE__) . '/lib/MyTheme_Customize_GoogleCalendar.php');
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
